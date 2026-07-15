@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evorax Longevity — Research Peptides | Péptidos de Investigación</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#071220;--navy-mid:#0b1a2e;--navy-light:#102038;
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dark:#8a6520;--gold-mid:#d4a843;
+  --white:#fff;--off-white:#f0ece0;--gray:#8a9ab5;--gray-light:#b8c4d4;
+  --border:rgba(201,168,76,.25);--border-s:rgba(255,255,255,.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;line-height:1.6;}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rl{opacity:0;transform:translateX(-60px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rl.visible{opacity:1;transform:translateX(0);}
+.rr{opacity:0;transform:translateX(60px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rr.visible{opacity:1;transform:translateX(0);}
+.rs{opacity:0;transform:scale(.8);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.rs.visible{opacity:1;transform:scale(1);}
+.d1{transition-delay:.06s!important}.d2{transition-delay:.13s!important}.d3{transition-delay:.2s!important}
+.d4{transition-delay:.27s!important}.d5{transition-delay:.34s!important}.d6{transition-delay:.41s!important}
+
+/* CANVAS */
+#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:74px;background:rgba(7,18,32,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);transition:all .4s;}
+nav.scrolled{background:rgba(7,18,32,.99);box-shadow:0 4px 40px rgba(0,0,0,.6),0 1px 0 var(--border);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+
+/* LOGO SVG — Replaces shield+infinity+DNA from sticker */
+.logo-emblem{width:48px;height:48px;filter:drop-shadow(0 0 10px rgba(201,168,76,.5));animation:emblemGlow 4s ease-in-out infinite;}
+@keyframes emblemGlow{0%,100%{filter:drop-shadow(0 0 6px rgba(201,168,76,.3));}50%{filter:drop-shadow(0 0 22px rgba(201,168,76,.8));}}
+
+.nav-logo-text{display:flex;flex-direction:column;line-height:1;}
+.nav-brand{font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;letter-spacing:5px;background:linear-gradient(135deg,#a07830,#e8c97a,#c9a84c,#a07830);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShift 4s ease infinite;}
+@keyframes goldShift{0%{background-position:0%;}50%{background-position:100%;}100%{background-position:0%;}}
+.nav-sub{font-size:9px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-top:3px;opacity:.8;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{text-decoration:none;font-size:11px;font-weight:600;color:var(--gray-light);letter-spacing:2px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));transition:width .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border-radius:20px;padding:3px;border:1px solid var(--border-s);}
+.lang-btn{padding:4px 12px;border-radius:16px;border:none;cursor:pointer;font-size:11px;font-weight:700;background:transparent;color:var(--gray);transition:all .2s;letter-spacing:1px;}
+.lang-btn.active{background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:var(--navy);}
+.nav-cta{padding:9px 22px;border-radius:8px;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));color:var(--navy);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s;position:relative;overflow:hidden;}
+.nav-cta::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s;}
+.nav-cta:hover::after{left:100%;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.55);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:74px 3rem 0;position:relative;overflow:hidden;z-index:1;}
+.h-orb{position:absolute;border-radius:50%;pointer-events:none;}
+.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);top:-15%;right:-8%;animation:orbF 9s ease-in-out infinite;}
+.o2{width:450px;height:450px;background:radial-gradient(circle,rgba(24,95,165,.1) 0%,transparent 70%);bottom:5%;left:-12%;animation:orbF 11s ease-in-out infinite reverse;}
+.o3{width:280px;height:280px;background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);top:55%;left:45%;animation:orbF 7s ease-in-out infinite 2s;}
+@keyframes orbF{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-45px) scale(1.07);}}
+.h-grid{position:absolute;inset:0;opacity:.025;background-image:linear-gradient(rgba(201,168,76,1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,1) 1px,transparent 1px);background-size:80px 80px;animation:gridD 25s linear infinite;}
+@keyframes gridD{from{background-position:0 0;}to{background-position:80px 80px;}}
+.h-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(201,168,76,.025) 50%,transparent 100%);background-size:100% 200px;animation:scanA 9s linear infinite;pointer-events:none;}
+@keyframes scanA{from{background-position:0 -200px;}to{background-position:0 100vh;}}
+
+/* HERO CONTENT */
+.hero-content{position:relative;z-index:2;max-width:720px;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:7px 18px;border-radius:30px;border:1px solid var(--border);background:rgba(201,168,76,.06);font-size:10px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:2.5rem;backdrop-filter:blur(10px);}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:bdotP 2s ease-in-out infinite;}
+@keyframes bdotP{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:.5;}}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(3.2rem,6.5vw,6.2rem);font-weight:900;line-height:.93;letter-spacing:-2px;margin-bottom:1.8rem;}
+.h1g{display:block;background:linear-gradient(135deg,#8a6520 0%,#e8c97a 40%,#c9a84c 70%,#8a6520 100%);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShift 5s ease infinite,titleIn .9s cubic-bezier(.16,1,.3,1) both;}
+.h1w{display:block;color:var(--white);animation:titleIn .9s cubic-bezier(.16,1,.3,1) .15s both;}
+@keyframes titleIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.hero-sub{font-size:17px;color:var(--gray-light);max-width:560px;margin-bottom:2.5rem;line-height:1.8;animation:titleIn .9s cubic-bezier(.16,1,.3,1) .3s both;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem;animation:titleIn .9s cubic-bezier(.16,1,.3,1) .45s both;}
+.btn-p{padding:15px 36px;border-radius:10px;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));color:var(--navy);font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .4s;box-shadow:0 6px 30px rgba(201,168,76,.35);display:inline-block;position:relative;overflow:hidden;}
+.btn-p::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s;}
+.btn-p:hover::before{left:100%;}
+.btn-p:hover{transform:translateY(-4px);box-shadow:0 16px 45px rgba(201,168,76,.6);}
+.btn-s{padding:15px 36px;border-radius:10px;border:1px solid var(--border);color:var(--off-white);font-weight:600;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.03);transition:all .3s;display:inline-block;}
+.btn-s:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);background:rgba(201,168,76,.05);}
+.hero-stats{display:flex;gap:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border-s);animation:titleIn .9s cubic-bezier(.16,1,.3,1) .6s both;}
+.hs-num{font-family:'Montserrat',sans-serif;font-size:2.4rem;font-weight:900;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hs-lbl{font-size:10px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+.scroll-cue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2;animation:titleIn 1s .9s both;}
+.sc-lbl{font-size:9px;letter-spacing:4px;color:var(--gray);text-transform:uppercase;}
+.sc-line{width:1px;height:55px;background:linear-gradient(180deg,var(--gold),transparent);animation:scLine 2s ease-in-out infinite;}
+@keyframes scLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* TRUST BAR */
+.trust-bar{background:var(--navy-mid);border-top:1px solid var(--border-s);border-bottom:1px solid var(--border-s);padding:2rem 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;z-index:1;}
+.ti{display:flex;align-items:center;gap:14px;padding:10px;border-radius:12px;transition:all .3s;cursor:default;}
+.ti:hover{background:rgba(201,168,76,.04);transform:translateY(-3px);}
+
+/* 3D GOLD ICONS */
+.icon3d{width:52px;height:52px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;transition:all .4s;}
+.icon3d svg{width:28px;height:28px;position:relative;z-index:1;}
+.icon3d-gold{background:linear-gradient(145deg,#1a3060 0%,#0d1f3c 50%,#071220 100%);border:1px solid rgba(201,168,76,.4);box-shadow:0 4px 15px rgba(0,0,0,.4),inset 0 1px 0 rgba(201,168,76,.3),inset 0 -1px 0 rgba(0,0,0,.3);}
+.ti:hover .icon3d-gold{box-shadow:0 8px 30px rgba(201,168,76,.3),inset 0 1px 0 rgba(201,168,76,.4),0 0 20px rgba(201,168,76,.15);transform:translateY(-2px) scale(1.05);}
+.ti-title{font-size:13px;font-weight:700;color:var(--white);}
+.ti-sub{font-size:11px;color:var(--gray);line-height:1.5;margin-top:1px;}
+
+/* SECTIONS */
+section{padding:6rem 3rem;position:relative;z-index:1;}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:12px;}
+.eyebrow::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+.sec-title{font-family:'Montserrat',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.05;margin-bottom:1.2rem;}
+.sec-sub{font-size:15px;color:var(--gray-light);max-width:580px;line-height:1.8;}
+.sh{margin-bottom:3.5rem;}
+.sh-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;}
+
+/* CATEGORY CARDS WITH 3D ICONS */
+#categories{background:var(--navy-mid);}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.cat-card{padding:2rem;border-radius:16px;border:1px solid var(--border-s);background:var(--navy);cursor:pointer;transition:all .4s cubic-bezier(.175,.885,.32,1.275);text-align:center;position:relative;overflow:hidden;}
+.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.04),transparent);opacity:0;transition:opacity .4s;}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s;}
+.cat-card:hover{border-color:var(--border);transform:translateY(-10px) scale(1.02);box-shadow:0 25px 60px rgba(0,0,0,.5),0 0 40px rgba(201,168,76,.08);}
+.cat-card:hover::before{opacity:1;}
+.cat-card:hover::after{transform:scaleX(1);}
+
+/* BIG 3D ICON for categories */
+.icon3d-big{width:72px;height:72px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;position:relative;transition:all .4s;}
+.icon3d-big svg{width:36px;height:36px;position:relative;z-index:1;}
+.i3db-gold{
+  background:linear-gradient(145deg,#1e3a6e 0%,#0d1f3c 60%,#071220 100%);
+  border:1px solid rgba(201,168,76,.35);
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.5),
+    0 2px 0 rgba(201,168,76,.2),
+    inset 0 1px 0 rgba(201,168,76,.25),
+    inset 0 -2px 4px rgba(0,0,0,.4),
+    0 0 0 1px rgba(0,0,0,.2);
+}
+.cat-card:hover .i3db-gold{
+  transform:translateY(-5px) scale(1.1) rotate(-3deg);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.5),
+    0 0 30px rgba(201,168,76,.3),
+    inset 0 1px 0 rgba(201,168,76,.4);
+}
+.cat-name{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:5px;transition:color .3s;}
+.cat-card:hover .cat-name{color:var(--gold-light);}
+.cat-count{font-size:11px;color:var(--gray);}
+
+/* PRODUCTS */
+#products{background:var(--navy);}
+.ship-banner{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(201,168,76,.03));border:1px solid var(--border);border-radius:10px;padding:14px 22px;margin-bottom:2.5rem;display:flex;align-items:center;gap:14px;font-size:13px;color:var(--gold-light);position:relative;overflow:hidden;}
+.ship-banner::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,168,76,.1),transparent);animation:sShim 4s ease-in-out infinite;}
+@keyframes sShim{from{left:-60%;}to{left:150%;}}
+.ship-banner svg{width:22px;height:22px;fill:none;stroke:var(--gold);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.frow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2.5rem;}
+.fb{padding:7px 18px;border-radius:25px;border:1px solid var(--border-s);background:transparent;color:var(--gray);font-size:11px;font-weight:600;letter-spacing:1.5px;cursor:pointer;transition:all .3s;text-transform:uppercase;}
+.fb.active,.fb:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07);transform:translateY(-1px);}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem;}
+
+/* PRODUCT CARD */
+.pcard{background:var(--navy-mid);border:1px solid var(--border-s);border-radius:16px;overflow:hidden;transition:all .4s cubic-bezier(.175,.885,.32,1.275);position:relative;}
+.pcard-glow{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .5s;transform-origin:center;}
+.pcard:hover{border-color:var(--border);transform:translateY(-10px) scale(1.015);box-shadow:0 28px 70px rgba(0,0,0,.55),0 0 40px rgba(201,168,76,.08);}
+.pcard:hover .pcard-glow{transform:scaleX(1);}
+.ptop{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:flex-start;}
+.pbadge{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:5px;border:1px solid;}
+.pb-w{color:#78b4f0;border-color:rgba(120,180,240,.3);background:rgba(120,180,240,.07);}
+.pb-l{color:#84e0b8;border-color:rgba(132,224,184,.3);background:rgba(132,224,184,.07);}
+.pb-sk{color:#e8a87c;border-color:rgba(232,168,124,.3);background:rgba(232,168,124,.07);}
+.pb-a{color:#c8a0e8;border-color:rgba(200,160,232,.3);background:rgba(200,160,232,.07);}
+.pb-b{color:#78d4b0;border-color:rgba(120,212,176,.3);background:rgba(120,212,176,.07);}
+.pb-c{color:#f0c87c;border-color:rgba(240,200,124,.3);background:rgba(240,200,124,.07);}
+.ppur{font-size:11px;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:4px;}
+.ppur svg{width:13px;height:13px;fill:none;stroke:var(--gold);stroke-width:2.5;}
+.pbody{padding:1.4rem 1.5rem;cursor:pointer;}
+.pname{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:.5px;margin-bottom:4px;transition:color .3s;}
+.pcard:hover .pname{background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pdose{font-size:11px;color:var(--gray);margin-bottom:1rem;}
+.pbens{list-style:none;margin-bottom:.5rem;}
+.pbens li{font-size:12px;color:var(--gray-light);padding:4px 0;display:flex;align-items:flex-start;gap:8px;border-bottom:1px solid rgba(255,255,255,.03);transition:color .3s;}
+.pbens li:last-child{border-bottom:none;}
+.pcard:hover .pbens li{color:var(--off-white);}
+.pbens li svg{width:13px;height:13px;fill:none;stroke:var(--gold);stroke-width:2.5;flex-shrink:0;margin-top:2px;}
+.pfoot{padding:1.2rem 1.5rem;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.pprice{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pprice-l{font-size:10px;color:var(--gray);display:block;letter-spacing:1px;text-transform:uppercase;}
+.pbuy{padding:11px 20px;border-radius:8px;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));color:var(--navy);font-size:11px;font-weight:800;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase;text-decoration:none;transition:all .3s;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;position:relative;overflow:hidden;}
+.pbuy::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .5s;}
+.pbuy:hover::before{left:100%;}
+.pbuy:hover{transform:scale(1.07) translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.55);}
+.pbuy svg{width:14px;height:14px;fill:none;stroke:var(--navy);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* WHY SECTION */
+#why{background:var(--navy-mid);}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.why-card{padding:2.2rem;border-radius:16px;border:1px solid var(--border-s);background:var(--navy);transition:all .4s;position:relative;overflow:hidden;}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .5s;}
+.why-card:hover{border-color:var(--border);transform:translateY(-6px);box-shadow:0 22px 55px rgba(0,0,0,.45);}
+.why-card:hover::before{transform:scaleX(1);}
+
+/* 3D ICON - Why cards */
+.wicon{width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.3rem;position:relative;transition:all .4s;
+  background:linear-gradient(145deg,#1e3a6e 0%,#0d1f3c 60%,#071220 100%);
+  border:1px solid rgba(201,168,76,.3);
+  box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(201,168,76,.2),inset 0 -2px 4px rgba(0,0,0,.4);
+}
+.why-card:hover .wicon{
+  transform:scale(1.12) rotate(-5deg);
+  box-shadow:0 12px 35px rgba(0,0,0,.5),0 0 25px rgba(201,168,76,.3),inset 0 1px 0 rgba(201,168,76,.4);
+}
+.wicon svg{width:28px;height:28px;position:relative;z-index:1;transition:all .3s;}
+.why-card-title{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.6rem;transition:color .3s;}
+.why-card:hover .why-card-title{color:var(--gold-light);}
+.why-card-text{font-size:13px;color:var(--gray-light);line-height:1.8;}
+
+/* QUALITY */
+#quality{background:var(--navy);}
+.q-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.q-steps{display:flex;flex-direction:column;gap:1.8rem;}
+.qs{display:flex;gap:1.2rem;padding:1.2rem;border-radius:12px;border:1px solid transparent;transition:all .4s;}
+.qs:hover{border-color:var(--border);background:rgba(201,168,76,.03);transform:translateX(10px);}
+.qs-num{width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-size:15px;font-weight:900;color:var(--navy);
+  transition:all .4s;
+  box-shadow:0 4px 20px rgba(201,168,76,.35),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.qs:hover .qs-num{box-shadow:0 8px 30px rgba(201,168,76,.6),0 0 20px rgba(201,168,76,.3);transform:scale(1.12);}
+.qs-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.qs-text{font-size:12px;color:var(--gray-light);line-height:1.7;}
+
+/* CERT BOX */
+.cert-box{padding:3rem;border-radius:20px;background:var(--navy-mid);border:1px solid var(--border);text-align:center;position:relative;overflow:hidden;}
+.cert-box::before{content:'';position:absolute;top:-60%;left:-60%;width:220%;height:220%;background:conic-gradient(from 0deg,transparent 0deg,rgba(201,168,76,.04) 60deg,transparent 120deg);animation:certSpin 12s linear infinite;}
+@keyframes certSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.cert-inner{position:relative;z-index:1;}
+
+/* CERT ICON 3D - Big award medal */
+.cert-icon-3d{
+  width:100px;height:100px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.8rem;
+  background:linear-gradient(145deg,#2a4a80 0%,#142545 50%,#071220 100%);
+  border:2px solid rgba(201,168,76,.4);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.6),
+    0 0 30px rgba(201,168,76,.15),
+    inset 0 2px 0 rgba(201,168,76,.3),
+    inset 0 -3px 6px rgba(0,0,0,.5),
+    0 0 0 1px rgba(201,168,76,.1);
+  animation:certFloat 4s ease-in-out infinite;
+}
+@keyframes certFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.cert-icon-3d svg{width:48px;height:48px;position:relative;z-index:1;}
+.cert-title{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:800;color:var(--gold-light);margin-bottom:.7rem;line-height:1.3;}
+.cert-text{font-size:13px;color:var(--gray-light);line-height:1.8;}
+.cert-badge{display:inline-flex;align-items:center;gap:8px;margin-top:1.8rem;padding:9px 22px;border-radius:25px;border:1px solid var(--border);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.cert-badge svg{width:14px;height:14px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* WHOLESALE */
+#wholesale{background:var(--navy-mid);}
+.ws-card{background:linear-gradient(135deg,var(--navy),var(--navy-light));border:1px solid var(--border);border-radius:20px;padding:3.5rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.ws-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light),var(--gold-dark));background-size:200%;animation:wsL 3s linear infinite;}
+@keyframes wsL{0%{background-position:0%;}100%{background-position:200%;}}
+.ws-title{font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:900;margin-bottom:1rem;background:linear-gradient(135deg,var(--white),var(--off-white));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ws-text{font-size:14px;color:var(--gray-light);line-height:1.8;max-width:500px;}
+.ws-tiers{display:flex;gap:1.5rem;margin-top:2.5rem;}
+.tier{padding:1.3rem 1.8rem;border-radius:12px;border:1px solid var(--border-s);
+  background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  text-align:center;transition:all .4s;cursor:default;
+  box-shadow:0 4px 15px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.tier:hover{border-color:var(--border);transform:translateY(-6px);
+  background:rgba(201,168,76,.04);
+  box-shadow:0 16px 40px rgba(0,0,0,.35),0 0 20px rgba(201,168,76,.1);
+}
+.t-lbl{font-size:9px;color:var(--gray);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
+.t-val{font-family:'Montserrat',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.t-desc{font-size:11px;color:var(--gray-light);margin-top:4px;}
+
+/* CONTACT */
+#contact{background:var(--navy);text-align:center;}
+.contact-wrap{max-width:650px;margin:0 auto;}
+.cbtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:10px;background:linear-gradient(135deg,#1aad4b,#25d366);color:white;font-weight:800;font-size:12px;letter-spacing:2px;text-decoration:none;transition:all .3s;text-transform:uppercase;position:relative;overflow:hidden;}
+.btn-wa::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .6s;}
+.btn-wa:hover::before{left:100%;}
+.btn-wa:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(37,211,102,.48);}
+.btn-wa svg{width:20px;height:20px;fill:white;}
+
+/* FOOTER */
+footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);position:relative;z-index:1;}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border-s);}
+.ft-brand-text{font-size:13px;color:var(--gray);line-height:1.8;margin-top:1rem;max-width:270px;}
+.ft-col-title{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-links a{text-decoration:none;font-size:13px;color:var(--gray);transition:all .25s;display:inline-block;}
+.ft-links a:hover{color:var(--gold);transform:translateX(5px);}
+.ft-bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;}
+.ft-legal{font-size:11px;color:rgba(138,154,181,.5);line-height:1.8;max-width:620px;}
+.ft-copy{font-size:11px;color:var(--gray);white-space:nowrap;}
+
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;z-index:200;background:rgba(5,14,26,.94);backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:2rem;}
+.mo.open{display:flex;animation:moIn .3s ease;}
+@keyframes moIn{from{opacity:0;}to{opacity:1;}}
+.modal{background:var(--navy-mid);border:1px solid var(--border);border-radius:20px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;animation:moSlide .35s cubic-bezier(.16,1,.3,1);}
+@keyframes moSlide{from{transform:translateY(40px) scale(.97);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
+.mh{padding:1.5rem 1.8rem;border-bottom:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center;}
+.mh-title{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:800;}
+.mc{background:rgba(255,255,255,.06);border:1px solid var(--border-s);color:var(--gray);font-size:18px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.mc:hover{color:var(--white);background:rgba(255,255,255,.12);transform:rotate(90deg);}
+.mb{padding:1.8rem;}
+.mb-dose{color:var(--gold);font-size:13px;font-weight:600;margin-bottom:1.2rem;}
+.mb-st{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin:1.5rem 0 .8rem;}
+.mb-bens{list-style:none;}
+.mb-bens li{font-size:13px;color:var(--gray-light);padding:7px 0;border-bottom:1px solid var(--border-s);display:flex;gap:10px;align-items:flex-start;}
+.mb-bens li:last-child{border-bottom:none;}
+.mb-bens li svg{width:14px;height:14px;fill:none;stroke:var(--gold);stroke-width:2.5;flex-shrink:0;margin-top:2px;}
+.mb-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mb-spec{background:var(--navy);border-radius:8px;padding:10px 14px;border:1px solid var(--border-s);}
+.mb-spec-l{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
+.mb-spec-v{font-size:13px;font-weight:600;}
+.mb-disc{font-size:10px;color:var(--gray);line-height:1.6;margin-top:1.2rem;padding:.9rem 1rem;background:rgba(255,255,255,.02);border-radius:8px;border-left:2px solid var(--border);display:flex;gap:8px;}
+.mb-disc svg{width:14px;height:14px;fill:none;stroke:var(--gold);stroke-width:2;flex-shrink:0;margin-top:1px;}
+.mfoot{padding:1.5rem 1.8rem;border-top:1px solid var(--border-s);display:flex;gap:1rem;align-items:center;justify-content:space-between;}
+.mf-price{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+@media(max-width:768px){
+  nav{padding:0 1.2rem;}
+  .nav-links{display:none;}
+  section{padding:4rem 1.2rem;}
+  .hero{padding:82px 1.2rem 0;}
+  .trust-bar{grid-template-columns:1fr 1fr;padding:1.2rem;}
+  .why-grid{grid-template-columns:1fr;}
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .q-inner{grid-template-columns:1fr;}
+  .ws-card{grid-template-columns:1fr;}
+  .ft-top{grid-template-columns:1fr 1fr;}
+  .hero-stats{gap:2rem;}
+}
+
+/* SEARCH BAR */
+.search-wrap { width:100%; }
+.search-box {
+  display:flex; align-items:center; gap:12px;
+  background:var(--navy-mid);
+  border:1px solid var(--border);
+  border-radius:50px;
+  padding:12px 20px;
+  transition:all .3s;
+  position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.search-box:focus-within {
+  border-color:var(--gold);
+  box-shadow:0 4px 30px rgba(0,0,0,.4), 0 0 20px rgba(201,168,76,.15), inset 0 1px 0 rgba(201,168,76,.1);
+}
+.search-icon { width:20px; height:20px; flex-shrink:0; }
+.search-input {
+  flex:1; background:transparent; border:none; outline:none;
+  color:var(--white); font-size:15px; font-family:'Inter',sans-serif;
+  font-weight:400; letter-spacing:.3px;
+}
+.search-input::placeholder { color:var(--gray); }
+.search-clear {
+  background:rgba(201,168,76,.1); border:1px solid var(--border);
+  border-radius:50%; width:28px; height:28px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all .2s; flex-shrink:0;
+}
+.search-clear:hover { background:rgba(201,168,76,.2); transform:rotate(90deg); }
+.search-results-info {
+  margin-top:10px; padding:0 8px;
+  font-size:12px; color:var(--gray); letter-spacing:.5px;
+}
+.search-results-info span { color:var(--gold); font-weight:600; }
+
+/* NO RESULTS */
+.no-results {
+  text-align:center; padding:4rem 2rem; grid-column:1/-1;
+}
+.no-results-icon {
+  width:70px; height:70px; border-radius:50%;
+  background:rgba(201,168,76,.07); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 1.5rem;
+}
+.no-results-icon svg { width:30px; height:30px; stroke:var(--gold); fill:none; stroke-width:1.5; }
+.no-results-title { font-family:'Montserrat',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:.5rem; }
+.no-results-text { font-size:13px; color:var(--gray-light); line-height:1.7; }
+
+/* PRODUCT CARD SEARCH HIGHLIGHT */
+.pcard.search-hidden { display:none; }
+.pcard.search-match .pname { position:relative; }
+
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<!-- SVG DEFS FOR GOLD GRADIENTS -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <linearGradient id="goldG" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#8a6520"/>
+    <stop offset="40%" stop-color="#e8c97a"/>
+    <stop offset="70%" stop-color="#c9a84c"/>
+    <stop offset="100%" stop-color="#8a6520"/>
+  </linearGradient>
+  <linearGradient id="goldG2" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#c9a84c"/>
+    <stop offset="100%" stop-color="#e8c97a"/>
+  </linearGradient>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow3d">
+    <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.6)"/>
+  </filter>
+</defs>
+</svg>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="data:image/jpeg;base64,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" class="logo-emblem" alt="Evorax Longevity Logo" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(201,168,76,0.5);box-shadow:0 0 15px rgba(201,168,76,0.4);">
+    <div class="nav-logo-text">
+      <span class="nav-brand">EVORAX</span>
+      <span class="nav-sub">Longevity</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products" data-es="Productos" data-en="Products">Productos</a></li>
+    <li><a href="#why" data-es="Por Qué Nosotros" data-en="Why Us">Por Qué Nosotros</a></li>
+    <li><a href="#quality" data-es="Calidad" data-en="Quality">Calidad</a></li>
+    <li><a href="#wholesale" data-es="Mayoreo" data-en="Wholesale">Mayoreo</a></li>
+    <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#products" class="nav-cta" data-es="Ordenar Ahora" data-en="Order Now">Ordenar Ahora</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="o1 h-orb"></div><div class="o2 h-orb"></div><div class="o3 h-orb"></div>
+  <div class="h-grid"></div><div class="h-scan"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="bdot"></div><span data-es="Péptidos de Investigación · Grado Premium" data-en="Research Peptides · Premium Grade">Péptidos de Investigación · Grado Premium</span></div>
+    <h1>
+      <span class="h1g" data-es="PÉPTIDOS" data-en="RESEARCH">PÉPTIDOS</span>
+      <span class="h1w" data-es="DE LONGEVIDAD." data-en="PEPTIDES.">DE LONGEVIDAD.</span>
+    </h1>
+    <p class="hero-sub" data-es="Pureza ≥99.9% certificada por laboratorio. Cada lote analizado de forma independiente. Ciencia verificable para investigación de avanzada." data-en="Laboratory-certified ≥99.9% purity. Every batch independently analyzed. Verifiable science for advanced research.">Pureza ≥99.9% certificada por laboratorio. Cada lote analizado de forma independiente. Ciencia verificable para investigación de avanzada.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-p" data-es="Ver Catálogo" data-en="Browse Catalog">Ver Catálogo</a>
+      <a href="#quality" class="btn-s" data-es="Ver Certificados" data-en="View Certificates">Ver Certificados</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-num"><span class="counter" data-target="99.9" data-suffix="%">0%</span></div><div class="hs-lbl" data-es="Pureza Garantizada" data-en="Purity Guaranteed">Pureza Garantizada</div></div>
+      <div><div class="hs-num"><span class="counter" data-target="12" data-suffix="+">0+</span></div><div class="hs-lbl" data-es="Péptidos Disponibles" data-en="Peptides Available">Péptidos Disponibles</div></div>
+      <div><div class="hs-num">COA</div><div class="hs-lbl" data-es="Por Cada Lote" data-en="Per Every Batch">Por Cada Lote</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="sc-lbl" data-es="Descubrir" data-en="Discover">Descubrir</span><div class="sc-line"></div></div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="ti reveal d1">
+    <div class="icon3d icon3d-gold">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="url(#goldG2)" opacity=".2"/>
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 12l2 2 4-4" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div><div class="ti-title" data-es="Pureza ≥99.9%" data-en="≥99.9% Purity">Pureza ≥99.9%</div><div class="ti-sub" data-es="Certificado por laboratorio" data-en="Lab certified">Certificado por laboratorio</div></div>
+  </div>
+  <div class="ti reveal d2">
+    <div class="icon3d icon3d-gold">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5"/>
+        <polyline points="14 2 14 8 20 8" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="9" y1="13" x2="15" y2="13" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="9" y1="17" x2="15" y2="17" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div><div class="ti-title" data-es="COA por Lote" data-en="COA Per Batch">COA por Lote</div><div class="ti-sub" data-es="Análisis independiente" data-en="Independent analysis">Análisis independiente</div></div>
+  </div>
+  <div class="ti reveal d3">
+    <div class="icon3d icon3d-gold">
+      <svg viewBox="0 0 24 24" fill="none">
+        <rect x="1" y="3" width="15" height="13" rx="2" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5"/>
+        <path d="M16 8h4l3 3v5h-7V8z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="5.5" cy="18.5" r="2.5" stroke="url(#goldG)" stroke-width="1.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5" stroke="url(#goldG)" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div><div class="ti-title" data-es="Envío Nacional" data-en="US Shipping">Envío Nacional</div><div class="ti-sub" data-es="Todo USA · $15.99" data-en="All USA · $15.99">Todo USA · $15.99</div></div>
+  </div>
+  <div class="ti reveal d4">
+    <div class="icon3d icon3d-gold">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" fill="url(#goldG2)" opacity=".12" stroke="url(#goldG)" stroke-width="1.5"/>
+        <path d="M12 6v6l4 2" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 3.5A9 9 0 013.5 7" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div><div class="ti-title" data-es="Envío Gratis" data-en="Free Shipping">Envío Gratis</div><div class="ti-sub" data-es="En pedidos sobre $200" data-en="On orders over $200">En pedidos sobre $200</div></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="sh">
+    <p class="eyebrow reveal" data-es="Nuestro Catálogo" data-en="Our Catalog">Nuestro Catálogo</p>
+    <h2 class="sec-title reveal" data-es="Categorías de Investigación" data-en="Research Categories">Categorías de Investigación</h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card reveal-scale d1" onclick="filterProducts('weight')">
+      <div class="icon3d-big i3db-gold">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="5" r="3" fill="url(#goldG2)" opacity=".3" stroke="url(#goldG)" stroke-width="1.5"/>
+          <path d="M6.5 9.5C5 10.5 4 12 4 14c0 3.5 3.5 6 8 6s8-2.5 8-6c0-2-1-3.5-2.5-4.5" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M9 13h6M9 16h6" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cat-name" data-es="Control de Peso" data-en="Weight Management">Control de Peso</div>
+      <div class="cat-count" data-es="3 productos" data-en="3 products">3 productos</div>
+    </div>
+    <div class="cat-card reveal-scale d2" onclick="filterProducts('longevity')">
+      <div class="icon3d-big i3db-gold">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#goldG2)" opacity=".25" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="cat-name" data-es="Longevidad / Energía" data-en="Longevity / Energy">Longevidad / Energía</div>
+      <div class="cat-count" data-es="1 producto" data-en="1 product">1 producto</div>
+    </div>
+    <div class="cat-card reveal-scale d3" onclick="filterProducts('skin')">
+      <div class="icon3d-big i3db-gold">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="url(#goldG2)" opacity=".25" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M12 8v4M10 10h4" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cat-name" data-es="Piel y Tejidos" data-en="Skin & Tissue">Piel y Tejidos</div>
+      <div class="cat-count" data-es="1 producto" data-en="1 product">1 producto</div>
+    </div>
+    <div class="cat-card reveal-scale d4" onclick="filterProducts('antioxidant')">
+      <div class="icon3d-big i3db-gold">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L4 6v6c0 5.5 3.5 10.5 8 12 4.5-1.5 8-6.5 8-12V6L12 2z" fill="url(#goldG2)" opacity=".25" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="12" cy="12" r="3" fill="url(#goldG2)" opacity=".4" stroke="url(#goldG)" stroke-width="1.2"/>
+          <path d="M12 9v-2M12 17v-2M9 12H7M17 12h-2" stroke="url(#goldG)" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cat-name" data-es="Antioxidante" data-en="Antioxidant">Antioxidante</div>
+      <div class="cat-count" data-es="1 producto" data-en="1 product">1 producto</div>
+    </div>
+    <div class="cat-card reveal-scale d5" onclick="filterProducts('body')">
+      <div class="icon3d-big i3db-gold">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="4" r="2" fill="url(#goldG2)" opacity=".4" stroke="url(#goldG)" stroke-width="1.5"/>
+          <path d="M7 8h10l-2 6H9L7 8z" fill="url(#goldG2)" opacity=".2" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M9 14l-2 6M15 14l2 6M9 14l3 3 3-3" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="cat-name" data-es="Composición Corporal" data-en="Body Composition">Composición Corporal</div>
+      <div class="cat-count" data-es="4 productos" data-en="4 products">4 productos</div>
+    </div>
+    <div class="cat-card reveal-scale d6" onclick="filterProducts('cognitive')">
+      <div class="icon3d-big i3db-gold">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 5C8.5 5 6 7.5 6 10c0 1.5.5 2.5 1.5 3.5L9 15v3h6v-3l1.5-1.5C17.5 12.5 18 11.5 18 10c0-2.5-2.5-5-6-5z" fill="url(#goldG2)" opacity=".25" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M9 18h6M10 21h4" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 9v3M10.5 10.5l1.5 1.5 1.5-1.5" stroke="url(#goldG)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="cat-name" data-es="Cognitivo / Neural" data-en="Cognitive / Neural">Cognitivo / Neural</div>
+      <div class="cat-count" data-es="2 productos" data-en="2 products">2 productos</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="sh">
+    <p class="eyebrow reveal" data-es="Catálogo Completo" data-en="Full Catalog">Catálogo Completo</p>
+    <div class="sh-row">
+      <h2 class="sec-title reveal" data-es="Todos los Productos" data-en="All Products">Todos los Productos</h2>
+      <a href="#wholesale" class="btn-s reveal" style="font-size:11px;padding:10px 22px;" data-es="Precios Mayoreo →" data-en="Wholesale Pricing →">Precios Mayoreo →</a>
+    </div>
+  </div>
+  <div class="ship-banner reveal">
+    <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    <span data-es="Envío estándar $15.99 · GRATIS en pedidos sobre $200 · Todo Estados Unidos" data-en="Standard shipping $15.99 · FREE on orders over $200 · All United States">Envío estándar $15.99 · GRATIS en pedidos sobre $200 · Todo Estados Unidos</span>
+  </div>
+  
+  <div class="search-wrap reveal" style="margin-bottom:1.5rem;">
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="8" stroke="url(#goldG)" stroke-width="1.8"/>
+        <path d="M21 21l-4.35-4.35" stroke="url(#goldG)" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <input 
+        type="text" 
+        id="productSearch"
+        class="search-input"
+        placeholder="Buscar producto... / Search product..."
+        oninput="searchProducts(this.value)"
+        autocomplete="off"
+      >
+      <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+          <line x1="18" y1="6" x2="6" y2="18" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="6" y1="6" x2="18" y2="18" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="search-results-info" id="searchInfo" style="display:none;">
+      <span id="searchInfoText"></span>
+    </div>
+  </div>
+
+  <div class="frow reveal">
+    <button class="fb active" onclick="filterProducts('all')" data-es="Todos" data-en="All">Todos</button>
+    <button class="fb" onclick="filterProducts('weight')" data-es="Control de Peso" data-en="Weight">Control de Peso</button>
+    <button class="fb" onclick="filterProducts('longevity')" data-es="Longevidad" data-en="Longevity">Longevidad</button>
+    <button class="fb" onclick="filterProducts('skin')" data-es="Piel" data-en="Skin">Piel</button>
+    <button class="fb" onclick="filterProducts('antioxidant')" data-es="Antioxidante" data-en="Antioxidant">Antioxidante</button>
+    <button class="fb" onclick="filterProducts('body')" data-es="Composición" data-en="Body">Composición</button>
+    <button class="fb" onclick="filterProducts('cognitive')" data-es="Cognitivo" data-en="Cognitive">Cognitivo</button>
+  </div>
+  <div class="pgrid" id="productsGrid"></div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="sh">
+    <p class="eyebrow reveal" data-es="Por Qué Evorax" data-en="Why Evorax">Por Qué Evorax</p>
+    <h2 class="sec-title reveal" data-es="Ciencia. Calidad. Confianza." data-en="Science. Quality. Trust.">Ciencia. Calidad. Confianza.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card rl d1">
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/><rect x="12" y="12" width="4" height="4" fill="url(#goldG2)" opacity=".4" rx="0.5"/></svg></div>
+      <div class="why-card-title" data-es="Pureza Verificada HPLC" data-en="HPLC-Verified Purity">Pureza Verificada HPLC</div>
+      <div class="why-card-text" data-es="Cromatografía líquida de alta resolución con detección UV confirma identidad y pureza ≥99.9% en cada lote." data-en="High-resolution liquid chromatography with UV detection confirms identity and ≥99.9% purity in every batch.">Cromatografía líquida de alta resolución con detección UV confirma identidad y pureza ≥99.9% en cada lote.</div>
+    </div>
+    <div class="why-card rr d1">
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/><polyline points="9 22 9 12 15 12 15 22" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <div class="why-card-title" data-es="Proveedores GMP Certificados" data-en="GMP Certified Suppliers">Proveedores GMP Certificados</div>
+      <div class="why-card-text" data-es="Trabajamos exclusivamente con fabricantes que cumplen Buenas Prácticas de Manufactura con trayectoria internacional verificable." data-en="We work exclusively with manufacturers meeting Good Manufacturing Practices with verifiable international track record.">Trabajamos exclusivamente con fabricantes que cumplen Buenas Prácticas de Manufactura con trayectoria internacional verificable.</div>
+    </div>
+    <div class="why-card rl d2">
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><rect x="1" y="3" width="15" height="13" rx="2" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5"/><path d="M16 8h4l3 3v5h-7V8z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5.5" cy="18.5" r="2.5" stroke="url(#goldG)" stroke-width="1.5"/><circle cx="18.5" cy="18.5" r="2.5" stroke="url(#goldG)" stroke-width="1.5"/></svg></div>
+      <div class="why-card-title" data-es="Envío Seguro con Tracking" data-en="Safe Shipping with Tracking">Envío Seguro con Tracking</div>
+      <div class="why-card-text" data-es="Empaque especializado preserva la integridad del péptido. Número de rastreo incluido en todo Estados Unidos." data-en="Specialized packaging preserves peptide integrity. Tracking number included throughout the United States.">Empaque especializado preserva la integridad del péptido. Número de rastreo incluido en todo Estados Unidos.</div>
+    </div>
+    <div class="why-card rr d2">
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <div class="why-card-title" data-es="Fichas Técnicas Completas" data-en="Complete Technical Sheets">Fichas Técnicas Completas</div>
+      <div class="why-card-text" data-es="Mecanismo de acción, especificaciones de pureza, protocolos y referencias científicas incluidas con cada producto." data-en="Mechanism of action, purity specifications, protocols and scientific references included with each product.">Mecanismo de acción, especificaciones de pureza, protocolos y referencias científicas incluidas con cada producto.</div>
+    </div>
+    <div class="why-card rl d3">
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" fill="none" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="why-card-title" data-es="Precios Competitivos" data-en="Competitive Pricing">Precios Competitivos</div>
+      <div class="why-card-text" data-es="Precios transparentes para detal y mayoreo. Envío gratis en pedidos sobre $200. Programa de revendedores con descuentos por volumen." data-en="Transparent pricing for retail and wholesale. Free shipping over $200. Reseller program with volume discounts.">Precios transparentes para detal y mayoreo. Envío gratis en pedidos sobre $200. Programa de revendedores con descuentos por volumen.</div>
+    </div>
+    <div class="why-card rr d3">
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10h8M8 14h5" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="why-card-title" data-es="Soporte vía WhatsApp" data-en="WhatsApp Support">Soporte vía WhatsApp</div>
+      <div class="why-card-text" data-es="Atención personalizada experta disponible vía WhatsApp. Acompañamiento completo desde la consulta hasta la entrega." data-en="Expert personalized support available via WhatsApp. Full accompaniment from inquiry to delivery.">Atención personalizada experta disponible vía WhatsApp. Acompañamiento completo desde la consulta hasta la entrega.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY -->
+<section id="quality">
+  <div class="q-inner">
+    <div>
+      <p class="eyebrow reveal" data-es="Nuestro Proceso" data-en="Our Process">Nuestro Proceso</p>
+      <h2 class="sec-title reveal" data-es="Calidad Sin Compromisos" data-en="Quality Without Compromise">Calidad Sin Compromisos</h2>
+      <p class="sec-sub reveal" style="margin-bottom:2.5rem;" data-es="Cada péptido pasa por verificación rigurosa antes de llegar a tus manos." data-en="Every peptide goes through rigorous verification before reaching your hands.">Cada péptido pasa por verificación rigurosa antes de llegar a tus manos.</p>
+      <div class="q-steps">
+        <div class="qs rl d1"><div class="qs-num">1</div><div><div class="qs-title" data-es="Selección de Proveedor GMP" data-en="GMP Supplier Selection">Selección de Proveedor GMP</div><div class="qs-text" data-es="Laboratorios certificados GMP con trayectoria verificable internacionalmente." data-en="GMP certified laboratories with internationally verifiable track record.">Laboratorios certificados GMP con trayectoria verificable internacionalmente.</div></div></div>
+        <div class="qs rl d2"><div class="qs-num">2</div><div><div class="qs-title" data-es="Análisis HPLC por Lote" data-en="HPLC Analysis per Batch">Análisis HPLC por Lote</div><div class="qs-text" data-es="Cromatografía líquida confirma identidad y pureza ≥99.9% en cada producción." data-en="Liquid chromatography confirms identity and ≥99.9% purity in each production.">Cromatografía líquida confirma identidad y pureza ≥99.9% en cada producción.</div></div></div>
+        <div class="qs rl d3"><div class="qs-num">3</div><div><div class="qs-title" data-es="Certificado COA Verificable" data-en="Verifiable COA Certificate">Certificado COA Verificable</div><div class="qs-text" data-es="COA público con QR code enlazado al reporte original del laboratorio por lote." data-en="Public COA with QR code linked to the original lab report per batch.">COA público con QR code enlazado al reporte original del laboratorio por lote.</div></div></div>
+        <div class="qs rl d4"><div class="qs-num">4</div><div><div class="qs-title" data-es="Envío y Almacenamiento Controlado" data-en="Controlled Shipping & Storage">Envío y Almacenamiento Controlado</div><div class="qs-text" data-es="Empaque liofilizado que preserva la integridad del péptido durante todo el transporte." data-en="Lyophilized packaging preserving peptide integrity throughout transport.">Empaque liofilizado que preserva la integridad del péptido durante todo el transporte.</div></div></div>
+      </div>
+    </div>
+    <div class="cert-box rr">
+      <div class="cert-inner">
+        <div class="cert-icon-3d">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8" r="5" fill="url(#goldG2)" opacity=".25" stroke="url(#goldG)" stroke-width="1.5"/>
+            <path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 8l2 2 4-4" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-title" data-es="Grado Premium · Investigación Científica" data-en="Premium Grade · Scientific Research">Grado Premium · Investigación Científica</div>
+        <div class="cert-text" data-es="Todos los productos Evorax Longevity son fabricados bajo estándares de laboratorio premium para estudios avanzados de investigación preclínica." data-en="All Evorax Longevity products are manufactured under premium laboratory standards for advanced preclinical research studies.">Todos los productos Evorax Longevity son fabricados bajo estándares de laboratorio premium para estudios avanzados de investigación preclínica.</div>
+        <div class="cert-badge">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="url(#goldG)" stroke-width="1.5"/><line x1="12" y1="9" x2="12" y2="13" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/></svg>
+          Research Use Only
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHOLESALE -->
+<section id="wholesale">
+  <div class="ws-card reveal">
+    <div>
+      <p class="eyebrow" data-es="Programa Mayoreo" data-en="Wholesale Program">Programa Mayoreo</p>
+      <div class="ws-title" data-es="Conviértete en Distribuidor" data-en="Become a Distributor">Conviértete en Distribuidor</div>
+      <p class="ws-text" data-es="Accede a precios escalonados por volumen, soporte de ventas exclusivo y materiales de marketing profesionales." data-en="Access volume-tiered pricing, exclusive sales support, and professional marketing materials.">Accede a precios escalonados por volumen, soporte de ventas exclusivo y materiales de marketing profesionales.</p>
+      <div class="ws-tiers">
+        <div class="tier reveal-scale d1"><div class="t-lbl" data-es="Nivel 1" data-en="Tier 1">Nivel 1</div><div class="t-val">15%</div><div class="t-desc">off · $500+</div></div>
+        <div class="tier reveal-scale d2"><div class="t-lbl" data-es="Nivel 2" data-en="Tier 2">Nivel 2</div><div class="t-val">25%</div><div class="t-desc">off · $1,500+</div></div>
+        <div class="tier reveal-scale d3"><div class="t-lbl" data-es="Nivel 3" data-en="Tier 3">Nivel 3</div><div class="t-val">35%</div><div class="t-desc">off · $3,000+</div></div>
+      </div>
+    </div>
+    <div style="text-align:center;"><a href="#contact" class="btn-p" data-es="Contactar Ahora" data-en="Contact Now">Contactar Ahora</a></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <p class="eyebrow reveal" style="justify-content:center;" data-es="Contáctanos" data-en="Contact Us">Contáctanos</p>
+    <h2 class="sec-title reveal" data-es="¿Listo para Ordenar?" data-en="Ready to Order?">¿Listo para Ordenar?</h2>
+    <p class="sec-sub reveal" style="margin:0 auto;" data-es="Nuestro equipo está disponible para asesorarte en tu selección de productos, precios mayoreo y envíos." data-en="Our team is available to advise you on product selection, wholesale pricing, and shipping.">Nuestro equipo está disponible para asesorarte en tu selección de productos, precios mayoreo y envíos.</p>
+    <div class="cbtns reveal">
+      <a href="https://wa.me/1XXXXXXXXXX" class="btn-wa">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-es="WhatsApp Directo" data-en="WhatsApp Direct">WhatsApp Directo</span>
+      </a>
+      <a href="mailto:info@evoraxlongevity.com" class="btn-s" data-es="Enviar Email" data-en="Send Email">Enviar Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <a href="#" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="data:image/jpeg;base64,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" alt="Evorax Logo" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,168,76,0.4);box-shadow:0 0 10px rgba(201,168,76,0.3);">
+        <div style="display:flex;flex-direction:column;line-height:1;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:15px;letter-spacing:4px;background:linear-gradient(135deg,#a07830,#e8c97a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">EVORAX</span>
+          <span style="font-size:8px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-top:2px;opacity:.8;">Longevity</span>
+        </div>
+      </a>
+      <p class="ft-brand-text" data-es="Péptidos de investigación de grado premium. Ciencia verificada. Calidad garantizada." data-en="Premium grade research peptides. Verified science. Guaranteed quality.">Péptidos de investigación de grado premium. Ciencia verificada. Calidad garantizada.</p>
+    </div>
+    <div>
+      <div class="ft-col-title" data-es="Productos" data-en="Products">Productos</div>
+      <ul class="ft-links"><li><a href="#products">Tirzepatide</a></li><li><a href="#products">Retatrutide</a></li><li><a href="#products">NAD+ 500mg</a></li><li><a href="#products">GHK-CU</a></li></ul>
+    </div>
+    <div>
+      <div class="ft-col-title" data-es="Empresa" data-en="Company">Empresa</div>
+      <ul class="ft-links">
+        <li><a href="#why" data-es="Por Qué Nosotros" data-en="Why Us">Por Qué Nosotros</a></li>
+        <li><a href="#quality" data-es="Calidad" data-en="Quality">Calidad</a></li>
+        <li><a href="#wholesale" data-es="Mayoreo" data-en="Wholesale">Mayoreo</a></li>
+        <li><a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title" data-es="Legal" data-en="Legal">Legal</div>
+      <ul class="ft-links">
+        <li><a href="#" data-es="Privacidad" data-en="Privacy">Privacidad</a></li>
+        <li><a href="#" data-es="Términos" data-en="Terms">Términos</a></li>
+        <li><a href="#" data-es="Envíos" data-en="Shipping">Envíos</a></li>
+        <li><a href="#" data-es="Devoluciones" data-en="Returns">Devoluciones</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-legal" data-es="⚠️ SOLO PARA USO EN INVESTIGACIÓN. Todos los productos son para investigación y desarrollo únicamente. No aptos para consumo humano. Las declaraciones no han sido evaluadas por la FDA. No destinados a diagnosticar, tratar, curar o prevenir ninguna enfermedad." data-en="⚠️ FOR RESEARCH USE ONLY. All products are for research and development use only. Not for human consumption. Statements have not been evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease.">⚠️ SOLO PARA USO EN INVESTIGACIÓN. Todos los productos son para investigación y desarrollo únicamente. No aptos para consumo humano. Las declaraciones no han sido evaluadas por la FDA.</p>
+    <p class="ft-copy">© 2026 Evorax Longevity. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="mo" id="mo" onclick="closeMo(event)">
+  <div class="modal" id="modal">
+    <div class="mh"><div class="mh-title" id="moTitle"></div><button class="mc" onclick="closeMoDirect()">✕</button></div>
+    <div id="moBody"></div>
+  </div>
+</div>
+
+<script>
+const products=[
+  {id:1,cat:'weight',name:'Tirzepatide',dose:'10mg / 20mg / 30mg',cl:{es:'Control de Peso',en:'Weight Management'},cc:'pb-w',price:'Desde $95',link:'https://square.link/u/dbF1BPpW',b:{es:['Homeostasis metabólica y control del apetito','Saciedad avanzada a largo plazo','Optimización del peso corporal','Apoyo a la salud cardiovascular'],en:['Metabolic homeostasis and appetite control','Advanced long-term satiety','Body weight optimization','Cardiovascular health support']},m:{es:'Agonista dual GLP-1 / GIP',en:'Dual GLP-1 / GIP agonist'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10/20/30mg/vial'}},
+  {id:2,cat:'weight',name:'Retatrutide',dose:'10mg',cl:{es:'Control de Peso',en:'Weight Management'},cc:'pb-w',price:'$99.99',link:'https://square.link/u/b5j57UIX',b:{es:['Triple agonista GLP-1/GIP/GCG','Control metabólico avanzado','Reducción de peso sostenida','Homeostasis de glucosa'],en:['Triple GLP-1/GIP/GCG agonist','Advanced metabolic control','Sustained weight reduction','Glucose homeostasis']},m:{es:'Triple agonista de receptores de incretina',en:'Triple incretin receptor agonist'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+  {id:3,cat:'longevity',name:'NAD+',dose:'500mg',cl:{es:'Longevidad / Energía',en:'Longevity / Energy'},cc:'pb-l',price:'$145',link:'https://square.link/u/25Cs7KH6',b:{es:['Producción mitocondrial de ATP','Reparación del ADN y longevidad celular','Optimización cognitiva y memoria','Función metabólica y vitalidad'],en:['Mitochondrial ATP production','DNA repair and cellular longevity','Cognitive optimization and memory','Metabolic function and vitality']},m:{es:'Coenzima esencial — energía celular',en:'Essential coenzyme — cellular energy'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'500mg/vial'}},
+  {id:4,cat:'skin',name:'GHK-CU',dose:'100mg',cl:{es:'Piel y Tejidos',en:'Skin & Tissue'},cc:'pb-sk',price:'$79–$119',link:'https://square.link/u/cJ6l4mQJ',b:{es:['Síntesis de colágeno y regeneración tisular','Elasticidad y firmeza de la piel','Regeneración celular profunda','Función neural y longevidad celular'],en:['Collagen synthesis and tissue regeneration','Skin elasticity and firmness','Deep cellular regeneration','Neural function and cellular longevity']},m:{es:'Péptido de cobre — activación de receptores',en:'Copper peptide — receptor activation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'100mg/vial'}},
+  {id:5,cat:'antioxidant',name:'Glutathione',dose:'1500mg',cl:{es:'Antioxidante',en:'Antioxidant'},cc:'pb-a',price:'$110',link:'https://square.link/u/sH5D4rWP',b:{es:['Neutralización de radicales libres','Desintoxicación celular profunda','Salud hepática y función detox','Vitalidad neuronal y energía'],en:['Free radical neutralization','Deep cellular detoxification','Liver health and detox function','Neuronal vitality and energy']},m:{es:'Tripéptido — antioxidante maestro',en:'Tripeptide — master antioxidant'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1500mg/vial'}},
+  {id:6,cat:'body',name:'IGF-LR3',dose:'1mg',cl:{es:'Composición Corporal',en:'Body Composition'},cc:'pb-b',price:'$110',link:'https://square.link/u/JnUVmEKJ',b:{es:['Crecimiento muscular y efecto anabólico','Vida media prolongada en investigación','Optimización de composición corporal','Regeneración y vitalidad tisular'],en:['Muscle growth and anabolic effect','Extended half-life for research','Body composition optimization','Tissue regeneration and vitality']},m:{es:'IGF — activación de receptores de proliferación',en:'IGF — proliferation receptor activation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1mg/vial'}},
+  {id:7,cat:'body',name:'Tesamorelin',dose:'10mg',cl:{es:'Composición Corporal',en:'Body Composition'},cc:'pb-b',price:'$90',link:'https://square.link/u/VHZu2UFe',b:{es:['GH pulsátil natural estimulada','Hormona del crecimiento optimizada','Reducción de grasa visceral','Masa muscular magra mejorada'],en:['Natural pulsatile GH stimulation','Optimized growth hormone','Visceral fat reduction','Improved lean muscle mass']},m:{es:'Análogo GHRH — activación pituitaria',en:'GHRH analogue — pituitary activation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+  {id:8,cat:'cognitive',name:'NA-Semax',dose:'10mg',cl:{es:'Cognitivo / Neural',en:'Cognitive / Neural'},cc:'pb-c',price:'$75',link:'https://square.link/u/OtQkDRZs',b:{es:['Optimización de función cognitiva global','Plasticidad sináptica y cerebral mejorada','Regeneración y salud neuronal','Memoria y agudeza mental'],en:['Global cognitive function optimization','Enhanced synaptic and brain plasticity','Neuronal regeneration and health','Memory and mental acuity']},m:{es:'Análogo ACTH/MSH — receptores neurales',en:'ACTH/MSH analogue — neural receptors'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+  {id:9,cat:'cognitive',name:'NA-Selank',dose:'10mg',cl:{es:'Cognitivo / Neural',en:'Cognitive / Neural'},cc:'pb-c',price:'$75',link:'https://square.link/u/H4JrqXy3',b:{es:['Reducción de ansiedad y estrés agudo','Mejora de memoria y aprendizaje','Optimización cognitiva global','Salud neuronal y vitalidad'],en:['Anxiety and acute stress reduction','Memory and learning improvement','Global cognitive optimization','Neuronal health and vitality']},m:{es:'Análogo de tuftisina — estimulación GABAA',en:'Tuftsin analogue — GABAA stimulation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+  {id:10,cat:'weight',name:'Cagrilintide',dose:'5mg',cl:{es:'Control de Peso',en:'Weight Management'},cc:'pb-w',price:'$140',link:'https://square.link/u/RhmV66Bm',b:{es:['Saciedad prolongada y control del apetito','Retraso del vaciado gástrico','Peso corporal optimizado','Neuroprotección metabólica'],en:['Extended satiety and appetite control','Delayed gastric emptying','Optimized body weight','Metabolic neuroprotection']},m:{es:'Análogo de amilina de acción prolongada',en:'Long-acting amylin analogue'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'5mg/vial'}},
+  {id:11,cat:'body',name:'CJC-1295 N-DAC',dose:'10mg',cl:{es:'Composición Corporal',en:'Body Composition'},cc:'pb-b',price:'$90',link:'https://square.link/u/95xuzqNO',b:{es:['GH pulsátil natural estimulada','Composición corporal mejorada','Masa muscular magra optimizada','Salud y vitalidad general'],en:['Natural pulsatile GH stimulation','Improved body composition','Optimized lean muscle mass','General health and vitality']},m:{es:'Péptido GHRH — estimulación pituitaria',en:'GHRH peptide — pituitary stimulation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+  {id:12,cat:'body',name:'BAC Water',dose:'3ml',cl:{es:'Accesorio',en:'Accessory'},cc:'pb-b',price:'$15',link:'https://square.link/u/to4MisgN',b:{es:['Agua bacteriostática estéril certificada','Reconstitución segura de péptidos','Preserva integridad del compuesto','Esencial para preparación de viales'],en:['Certified sterile bacteriostatic water','Safe peptide reconstitution','Preserves compound integrity','Essential for vial preparation']},m:{es:'Agua bacteriostática — disolvente estéril',en:'Bacteriostatic water — sterile solvent'},s:{pureza:'Estéril',formato:'Líquido',storage:'Temperatura ambiente',conc:'3ml/vial'}}
+];
+
+const chkSVG=`<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="13" height="13"><polyline points="20 6 9 17 4 12" stroke="url(#goldG)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const cartSVG=`<svg viewBox="0 0 24 24" fill="none" width="14" height="14"><circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="2"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const warnSVG=`<svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="url(#goldG)" stroke-width="1.5"/><line x1="12" y1="9" x2="12" y2="13" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/></svg>`;
+
+let lang='es',flt='all';
+window.currentLang='es';
+
+// CANVAS
+const cv=document.getElementById('bgCanvas');
+const cx2=cv.getContext('2d');
+function rsz(){cv.width=innerWidth;cv.height=innerHeight;}rsz();
+window.addEventListener('resize',rsz);
+const pts=Array.from({length:140},()=>({
+  x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,
+  r:Math.random()*1.3+.2,o:Math.random()*.3+.07,
+  gold:Math.random()>.62
+}));
+function draw(){
+  cx2.clearRect(0,0,cv.width,cv.height);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>cv.width)p.vx*=-1;
+    if(p.y<0||p.y>cv.height)p.vy*=-1;
+    cx2.beginPath();cx2.arc(p.x,p.y,p.r,0,Math.PI*2);
+    cx2.fillStyle=p.gold?`rgba(201,168,76,${p.o})`:`rgba(138,154,181,${p.o*.5})`;
+    cx2.fill();
+  });
+  pts.forEach((p,i)=>{
+    for(let j=i+1;j<pts.length;j++){
+      const d=Math.hypot(p.x-pts[j].x,p.y-pts[j].y);
+      if(d<100){cx2.beginPath();cx2.moveTo(p.x,p.y);cx2.lineTo(pts[j].x,pts[j].y);cx2.strokeStyle=`rgba(201,168,76,${.04*(1-d/100)})`;cx2.lineWidth=.4;cx2.stroke();}
+    }
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+// SCROLL
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.rl,.rr,.rs,.reveal-scale').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>50));
+
+// COUNTERS
+document.querySelectorAll('.counter').forEach(el=>{
+  const o=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+    const t=parseFloat(el.dataset.target),sf=el.dataset.suffix||'',steps=60;let c=0;
+    const tm=setInterval(()=>{c+=t/steps;if(c>=t){c=t;clearInterval(tm);}
+      el.textContent=(Number.isInteger(t)?Math.round(c):c.toFixed(1))+sf;},2000/steps);
+    o.unobserve(el);
+  }});},{threshold:.5});
+  o.observe(el);
+});
+
+// LANG
+function setLang(l){
+  window.currentLang=l;
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  document.querySelectorAll('[data-es]').forEach(el=>{if(el.tagName!=='INPUT')el.textContent=el.getAttribute(`data-${l}`);});
+  renderProducts(flt);
+}
+
+// PRODUCTS
+function renderProducts(f){
+  flt=f;
+  const g=document.getElementById('productsGrid');
+  const list=f==='all'?products:products.filter(p=>p.cat===f);
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.fb').forEach(b=>{
+    if(f==='all'&&b.getAttribute('data-es')==='Todos')b.classList.add('active');
+    if(f!=='all'&&b.onclick?.toString().includes(`'${f}'`))b.classList.add('active');
+  });
+  g.innerHTML=list.map((p,i)=>`
+    <div class="pcard" style="opacity:0;transform:translateY(30px);transition:opacity .5s ${i*.07}s ease,transform .5s ${i*.07}s ease,border-color .4s,box-shadow .4s,transform .4s">
+      <div class="pcard-glow"></div>
+      <div class="ptop">
+        <span class="pbadge ${p.cc}">${p.cl[lang]}</span>
+        <span class="ppur"><svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>≥99.9%</span>
+      </div>
+      <div class="pbody" onclick="openMo(${p.id})">
+        <div class="pname">${p.name}</div>
+        <div class="pdose">${p.dose} · ${lang==='es'?'Péptido Liofilizado Premium':'Premium Lyophilized Peptide'}</div>
+        <ul class="pbens">${p.b[lang].slice(0,3).map(b=>`<li>${chkSVG}<span>${b}</span></li>`).join('')}</ul>
+      </div>
+      <div class="pfoot">
+        <div><span class="pprice-l">${lang==='es'?'Precio':'Price'}</span><div class="pprice">${p.price}</div></div>
+        <a href="${p.link}" target="_blank" class="pbuy">${cartSVG}${lang==='es'?'Comprar':'Buy Now'}</a>
+      </div>
+    </div>`).join('');
+  setTimeout(()=>g.querySelectorAll('.pcard').forEach(c=>{c.style.opacity='1';c.style.transform='translateY(0)';}),60);
+}
+
+function filterProducts(f){renderProducts(f);document.getElementById('products').scrollIntoView({behavior:'smooth'});}
+
+function openMo(id){
+  const p=products.find(x=>x.id===id),l=lang;
+  document.getElementById('moTitle').textContent=`${p.name} ${p.dose}`;
+  document.getElementById('moBody').innerHTML=`
+    <div class="mb">
+      <div class="mb-dose">${p.cl[l]} · ${p.m[l]}</div>
+      <div class="mb-st">${l==='es'?'Beneficios Clave':'Key Benefits'}</div>
+      <ul class="mb-bens">${p.b[l].map(b=>`<li>${chkSVG}<span>${b}</span></li>`).join('')}</ul>
+      <div class="mb-st">${l==='es'?'Especificaciones':'Specifications'}</div>
+      <div class="mb-specs">
+        <div class="mb-spec"><div class="mb-spec-l">${l==='es'?'Pureza':'Purity'}</div><div class="mb-spec-v">${p.s.pureza}</div></div>
+        <div class="mb-spec"><div class="mb-spec-l">${l==='es'?'Concentración':'Concentration'}</div><div class="mb-spec-v">${p.s.conc}</div></div>
+        <div class="mb-spec"><div class="mb-spec-l">${l==='es'?'Formato':'Format'}</div><div class="mb-spec-v">${p.s.formato}</div></div>
+        <div class="mb-spec"><div class="mb-spec-l">${l==='es'?'Almacenamiento':'Storage'}</div><div class="mb-spec-v">${p.s.storage}</div></div>
+      </div>
+      <div class="mb-disc">${warnSVG}${l==='es'?'Uso exclusivo para investigación preclínica. No apto para consumo humano. Solo para fines de investigación científica.':'For preclinical research use only. Not for human consumption. For scientific research purposes only.'}</div>
+    </div>
+    <div class="mfoot">
+      <div><div style="font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;">${l==='es'?'Precio':'Price'}</div><div class="mf-price">${p.price}</div></div>
+      <a href="${p.link}" target="_blank" class="btn-p" style="font-size:11px;padding:12px 26px;display:inline-flex;align-items:center;gap:8px;">${cartSVG}${l==='es'?'Ordenar en Square':'Order on Square'}</a>
+    </div>`;
+  document.getElementById('mo').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMo(e){if(e.target===document.getElementById('mo'))closeMoDirect();}
+function closeMoDirect(){document.getElementById('mo').classList.remove('open');document.body.style.overflow='';}
+
+
+// ── SEARCH ──
+let searchTerm = '';
+
+function searchProducts(val) {
+  searchTerm = val.toLowerCase().trim();
+  const clearBtn = document.getElementById('searchClear');
+  const infoEl = document.getElementById('searchInfo');
+  const infoText = document.getElementById('searchInfoText');
+  
+  clearBtn.style.display = searchTerm ? 'flex' : 'none';
+  
+  const cards = document.querySelectorAll('.pcard');
+  let visibleCount = 0;
+  
+  cards.forEach(card => {
+    const name = card.querySelector('.pname')?.textContent?.toLowerCase() || '';
+    const dose = card.querySelector('.pdose')?.textContent?.toLowerCase() || '';
+    const badge = card.querySelector('.pbadge')?.textContent?.toLowerCase() || '';
+    const bens = Array.from(card.querySelectorAll('.pbens li span')).map(el => el.textContent.toLowerCase()).join(' ');
+    
+    const combined = `${name} ${dose} ${badge} ${bens}`;
+    const matches = !searchTerm || combined.includes(searchTerm);
+    
+    card.style.display = matches ? '' : 'none';
+    if (matches) visibleCount++;
+  });
+  
+  // Remove existing no-results message
+  const existing = document.querySelector('.no-results');
+  if (existing) existing.remove();
+  
+  if (searchTerm) {
+    infoEl.style.display = 'block';
+    const lang = window.currentLang || 'es';
+    if (visibleCount === 0) {
+      infoText.innerHTML = lang === 'es' 
+        ? `No se encontraron productos para <span>"${val}"</span>`
+        : `No products found for <span>"${val}"</span>`;
+      // Add no results card
+      document.getElementById('productsGrid').insertAdjacentHTML('beforeend', `
+        <div class="no-results">
+          <div class="no-results-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <div class="no-results-title">${lang === 'es' ? 'Sin resultados' : 'No results'}</div>
+          <div class="no-results-text">${lang === 'es' ? `No encontramos productos para "<strong>${val}</strong>".<br>Intenta con otro nombre como "NAD", "GHK" o "Tirzepatide".` : `No products found for "<strong>${val}</strong>".<br>Try another name like "NAD", "GHK" or "Tirzepatide".`}</div>
+        </div>
+      `);
+    } else {
+      infoText.innerHTML = lang === 'es'
+        ? `${visibleCount} producto${visibleCount !== 1 ? 's' : ''} encontrado${visibleCount !== 1 ? 's' : ''} para <span>"${val}"</span>`
+        : `${visibleCount} product${visibleCount !== 1 ? 's' : ''} found for <span>"${val}"</span>`;
+    }
+  } else {
+    infoEl.style.display = 'none';
+  }
+}
+
+function clearSearch() {
+  document.getElementById('productSearch').value = '';
+  searchProducts('');
+  document.getElementById('productSearch').focus();
+}
+
+renderProducts('all');
+</script>
+</body>
+</html>
