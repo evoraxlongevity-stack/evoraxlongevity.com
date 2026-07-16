@@ -507,6 +507,42 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
 .price-locked{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);font-style:italic;}
 .price-locked svg{width:14px;height:14px;stroke:var(--gray);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
+
+/* ── REFERRAL SYSTEM ── */
+.ref-banner{
+  position:fixed;bottom:20px;left:20px;z-index:150;
+  background:var(--navy-mid);border:1px solid var(--border);
+  border-radius:12px;padding:12px 16px;
+  display:none;align-items:center;gap:10px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  animation:slideInLeft .4s cubic-bezier(.16,1,.3,1);
+  max-width:280px;
+}
+.ref-banner.show{display:flex;}
+@keyframes slideInLeft{from{transform:translateX(-100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.ref-banner-icon{width:36px;height:36px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ref-banner-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.ref-banner-text{font-size:12px;color:var(--gray-light);line-height:1.4;}
+.ref-banner-name{font-weight:700;color:var(--gold);}
+
+/* ── REWARDS BANNER ── */
+.rewards-bar{
+  background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));
+  border:1px solid var(--border);border-radius:10px;
+  padding:14px 20px;margin-bottom:1.5rem;
+  display:none;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.rewards-bar.show{display:flex;}
+.rewards-info{display:flex;align-items:center;gap:10px;}
+.rewards-icon{width:36px;height:36px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+.rewards-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.rewards-text{font-size:13px;color:var(--gold-light);}
+.rewards-text strong{color:var(--gold);}
+.rewards-level{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);color:var(--gold);font-weight:700;letter-spacing:1px;}
+.rewards-progress{width:100%;height:4px;background:var(--border-s);border-radius:2px;overflow:hidden;margin-top:6px;}
+.rewards-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));border-radius:2px;transition:width .8s ease;}
+
 </style>
 </head>
 <body>
@@ -712,6 +748,8 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
       <a href="#wholesale" class="btn-s reveal" style="font-size:11px;padding:10px 22px;" data-es="Precios Mayoreo →" data-en="Wholesale Pricing →">Precios Mayoreo →</a>
     </div>
   </div>
+    <div class="rewards-bar" id="rewardsBar"></div>
+
   <div class="ship-banner reveal">
     <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
     <span data-es="Envío estándar $15.99 · GRATIS en pedidos sobre $200 · Todo Estados Unidos" data-en="Standard shipping $15.99 · FREE on orders over $200 · All United States">Envío estándar $15.99 · GRATIS en pedidos sobre $200 · Todo Estados Unidos</span>
@@ -1201,8 +1239,191 @@ async function submitGate(e) {
   }
 }
 
-// Check on load
-window.addEventListener('load', () => {
+
+// ── REFERRAL & REWARDS SYSTEM ──
+const SHEET_ID = "16LuwZBKMzs5uUmUyUI8AsWoaw2Qh8zkVn0_dvQ5uH0E";
+const SHEET_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+
+let vendedores = {};
+let currentRef = null;
+
+// Parse CSV
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,'').toUpperCase());
+  const result = {};
+  for (let i = 1; i < lines.length; i++) {
+    const vals = lines[i].split(',').map(v => v.trim().replace(/"/g,''));
+    if (vals[0]) {
+      const codigo = vals[0].toUpperCase();
+      result[codigo] = {};
+      headers.forEach((h, idx) => { result[codigo][h] = vals[idx] || ''; });
+    }
+  }
+  return result;
+}
+
+// Load vendedores from Google Sheet
+async function loadVendedores() {
+  try {
+    const res = await fetch(SHEET_CSV);
+    const text = await res.text();
+    vendedores = parseCSV(text);
+    console.log('Vendedores cargados:', Object.keys(vendedores).length);
+  } catch(e) {
+    console.log('Sheet no disponible, modo offline');
+  }
+}
+
+// Check URL for ref code
+function checkRefCode() {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref')?.toUpperCase();
+  if (!ref) return;
+  
+  // Save ref code
+  sessionStorage.setItem('evorax_ref', ref);
+  currentRef = ref;
+  
+  // Show banner with vendedor name
+  setTimeout(() => {
+    const banner = document.getElementById('refBanner');
+    const nameEl = document.getElementById('refBannerName');
+    const vendedor = vendedores[ref];
+    nameEl.textContent = vendedor ? vendedor.NOMBRE : ref;
+    banner.classList.add('show');
+    setTimeout(() => banner.classList.remove('show'), 5000);
+  }, 1500);
+}
+
+// Get ref from session
+function getRef() {
+  return sessionStorage.getItem('evorax_ref') || currentRef || '';
+}
+
+// ── REWARDS SYSTEM ──
+function getPoints() {
+  return parseInt(localStorage.getItem('evorax_points') || '50'); // 50 bonus on register
+}
+
+function addPoints(amount) {
+  const current = getPoints();
+  const newPoints = current + Math.floor(amount);
+  localStorage.setItem('evorax_points', newPoints);
+  return newPoints;
+}
+
+function getLevel(points) {
+  const lang = window.currentLang || 'es';
+  if (points >= 1000) return { name: lang==='es'?'💎 Diamond':'💎 Diamond', discount: 25, next: null, needed: 0 };
+  if (points >= 700) return { name: lang==='es'?'🥇 Elite':'🥇 Elite', discount: 15, next: 'Diamond', needed: 1000-points };
+  if (points >= 300) return { name: lang==='es'?'🥈 Advanced':'🥈 Advanced', discount: 10, next: 'Elite', needed: 700-points };
+  return { name: lang==='es'?'🥉 Explorer':'🥉 Explorer', discount: 5, next: 'Advanced', needed: 300-points };
+}
+
+function showRewardsBar() {
+  if (!checkRegistered()) return;
+  const points = getPoints();
+  const level = getLevel(points);
+  const lang = window.currentLang || 'es';
+  
+  const bar = document.getElementById('rewardsBar');
+  if (!bar) return;
+  
+  const maxPoints = level.next ? (level.name.includes('Explorer') ? 300 : level.name.includes('Advanced') ? 700 : 1000) : 1000;
+  const progress = Math.min((points / maxPoints) * 100, 100);
+  
+  bar.innerHTML = `
+    <div class="rewards-info">
+      <div class="rewards-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg></div>
+      <div>
+        <div class="rewards-text">
+          ${lang==='es'?'Tus puntos':'Your points'}: <strong>${points} pts</strong> · ${lang==='es'?'Descuento actual':'Current discount'}: <strong>${level.discount}% off</strong>
+        </div>
+        ${level.next ? `<div class="rewards-progress"><div class="rewards-progress-fill" style="width:${progress}%"></div></div>` : ''}
+        ${level.next ? `<div style="font-size:10px;color:var(--gray);margin-top:4px;">${lang==='es'?'Faltan':'Need'} ${level.needed} ${lang==='es'?'puntos para':'points for'} ${level.next}</div>` : ''}
+      </div>
+    </div>
+    <div class="rewards-level">${level.name}</div>
+  `;
+  bar.classList.add('show');
+}
+
+// Override submitGate to add ref + points
+const originalSubmitGate = submitGate;
+async function submitGate(e) {
+  e.preventDefault();
+  const name = document.getElementById('gateName').value.trim();
+  const email = document.getElementById('gateEmail').value.trim();
+  const phone = document.getElementById('gatePhone').value.trim();
+  const btn = document.getElementById('gateSubmitBtn');
+  const lang = window.currentLang || 'es';
+  const ref = getRef();
+
+  if (!name || !email) return;
+  btn.disabled = true;
+  btn.querySelector('span').textContent = lang === 'es' ? 'Procesando...' : 'Processing...';
+
+  try {
+    const fields = { name: name };
+    if (phone) fields.phone = phone;
+    if (ref) fields.ref_code = ref;
+
+    await fetch('https://connect.mailerlite.com/api/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiYmI1ZWRlODgzZWRjYjFiNGEyOWNhNTVlYjBmOTYxN2M1ZjI3Y2QyZWYwMDBhYjE3NzM2MzIxYTFmYzg4NTdlNmU5MjkzOGVhMGU2NTU5ZWYiLCJpYXQiOjE3ODQxMzQyNTIuMzAzNjgzLCJuYmYiOjE3ODQxMzQyNTIuMzAzNjg1LCJleHAiOjQ5Mzk4MDc4NTIuMjk5NTQ2LCJzdWIiOiIyNTI5OTg2Iiwic2NvcGVzIjpbXX0.aRXor-MARuoY1MpZrXQaxOb2gAJlZnlPBvhR6pxjVi34-R1D4B8qUZmSsaIHCdWgYb73dJGAhngyXMuetNl1DycaMXJbIeSjZn67nFcUmbpu4OpR9uQI-FOqb9572Iye4_TAGKI4ScPtvh8bndlyIoQ1f4VkkfIDef1vt2yKY4re9C0KCZAjyAX7qUIfNpd5kWEk4DHmiy9K8UibMZXZjAs_OHfHXQFHn5DUrQCs4LTxg82dy8omwsLKQV5t4ZjVG7bmKfrKlxWLqpr-r9hV795nGHNrv2lNKu1dZxkLuQh7vzZZw6nQzVfzMqH9DdLLHNwuxW7VlN1_VB6_Oe_wPKjZKY_sysxyyKzA-Q4rGLMtsPQoDuQtEM2LuDWfMKECEbSkXA3p2f7W94FHUq_NdC2l_rPQqibdnO1Wo2GxXqBN2LbtYJaT03KZwvgLB--ZvUaGPyA50G0RCzUwpL4vJmvdRsRrucVC-bvte6Ykn4jshDgjdG1rWofY_XT1S66BDX92D7K4hB6hH5zW2ehoOPQ8giYh7Qx2Z37x0bo4TegRTv4yjifmUQE8RRKyCDqjuC-L8q-NJcNH6wvdrx_MuYSzDxCRphWeCcRYU7KwuvD3YzLCiZDDBUXqFFotbUjnPGZfY5sL0EtMR-9xuWfE-poltJwjP7UcygH9bVCtbUc`
+      },
+      body: JSON.stringify({ email, fields, status: 'active' })
+    });
+  } catch(e) {
+    console.log('MailerLite error:', e);
+  }
+
+  // Save locally
+  localStorage.setItem('evorax_registered', 'true');
+  localStorage.setItem('evorax_email', email);
+  localStorage.setItem('evorax_name', name);
+  if (ref) localStorage.setItem('evorax_ref', ref);
+  
+  // Add 50 welcome points
+  localStorage.setItem('evorax_points', '50');
+
+  document.getElementById('gateFormContent').style.display = 'none';
+  document.getElementById('gateSuccess').style.display = 'block';
+  document.getElementById('gateSuccess').innerHTML = `
+    <div class="gate-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="gate-success-title">¡Bienvenido a Evorax!</div>
+    <p class="gate-success-text">
+      ${lang==='es'?'Ya tienes acceso completo al catálogo.':'You now have full access to the catalog.'}<br><br>
+      🎁 <strong style="color:var(--gold);">+50 puntos de bienvenida</strong> agregados a tu cuenta.<br>
+      <span style="font-size:11px;color:var(--gray);">${lang==='es'?'Nivel actual: 🥉 Explorer — 5% descuento':'Current level: 🥉 Explorer — 5% off'}</span>
+    </p>
+  `;
+
+  setTimeout(() => {
+    document.getElementById('gateOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+    userRegistered = true;
+    renderProducts(window.currentFilter || 'all');
+    showRewardsBar();
+  }, 2500);
+}
+
+// Initialize on load
+window.addEventListener('load', async () => {
+  await loadVendedores();
+  checkRefCode();
+  if (checkRegistered()) {
+    userRegistered = true;
+    showRewardsBar();
+  }
+});
+
+// Check on load - REPLACED
+window.addEventListener('load_old', () => {
   if (checkRegistered()) {
     userRegistered = true;
   }
@@ -1243,6 +1464,18 @@ renderProducts('all');
       <div class="gate-success-title" data-es="¡Bienvenido a Evorax!" data-en="Welcome to Evorax!">¡Bienvenido a Evorax!</div>
       <p class="gate-success-text" data-es="Ya tienes acceso completo a nuestro catálogo y precios. ¡Gracias por registrarte!" data-en="You now have full access to our catalog and prices. Thank you for registering!">Ya tienes acceso completo a nuestro catálogo y precios. ¡Gracias por registrarte!</p>
     </div>
+  </div>
+</div>
+
+
+<!-- REFERRAL BANNER -->
+<div class="ref-banner" id="refBanner">
+  <div class="ref-banner-icon">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+  </div>
+  <div class="ref-banner-text">
+    Referido por <span class="ref-banner-name" id="refBannerName"></span><br>
+    <span style="font-size:11px;color:var(--gray);">Referred by</span>
   </div>
 </div>
 
