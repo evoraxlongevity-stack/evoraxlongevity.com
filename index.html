@@ -543,6 +543,14 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
 .rewards-progress{width:100%;height:4px;background:var(--border-s);border-radius:2px;overflow:hidden;margin-top:6px;}
 .rewards-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));border-radius:2px;transition:width .8s ease;}
 
+
+.variant-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.variant-btn{padding:5px 12px;border-radius:6px;border:1px solid var(--border-s);background:transparent;color:var(--gray-light);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.variant-btn:hover,.variant-btn.active{border-color:var(--gold);color:var(--navy);background:linear-gradient(135deg,var(--gold-dark),var(--gold));}
+.disclaimer-badge{display:flex;align-items:center;gap:6px;padding:7px 10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;margin-top:8px;}
+.disclaimer-badge svg{width:13px;height:13px;stroke:#e8c97a;fill:none;stroke-width:2;flex-shrink:0;}
+.disclaimer-badge span{font-size:9px;color:#8a9ab5;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+
 </style>
 </head>
 <body>
@@ -613,7 +621,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
     </div>
     <div class="hero-stats">
       <div><div class="hs-num"><span class="counter" data-target="99.9" data-suffix="%">0%</span></div><div class="hs-lbl" data-es="Pureza Garantizada" data-en="Purity Guaranteed">Pureza Garantizada</div></div>
-      <div><div class="hs-num"><span class="counter" data-target="16" data-suffix="+">0+</span></div><div class="hs-lbl" data-es="Productos Disponibles" data-en="Products Available">Productos Disponibles</div></div>
+      <div><div class="hs-num"><span class="counter" data-target="12" data-suffix="+">0+</span></div><div class="hs-lbl" data-es="Productos Disponibles" data-en="Products Available">Productos Disponibles</div></div>
       <div><div class="hs-num">COA</div><div class="hs-lbl" data-es="Por Cada Lote" data-en="Per Every Batch">Por Cada Lote</div></div>
     </div>
   </div>
@@ -682,7 +690,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
         </svg>
       </div>
       <div class="cat-name" data-es="Control de Peso" data-en="Weight Management">Control de Peso</div>
-      <div class="cat-count" data-es="5 productos" data-en="5 products">5 productos</div>
+      <div class="cat-count" data-es="3 productos" data-en="3 products">3 productos</div>
     </div>
     <div class="cat-card reveal-scale d2" onclick="filterProducts('longevity')">
       <div class="icon3d-big i3db-gold">
@@ -951,22 +959,137 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
 
 <script>
 const products=[
-  {id:1,cat:'weight',name:'Tirzepatide',dose:'10mg',cl:{es:'Pérdida de Peso · Control Metabólico',en:'Weight Loss · Metabolic Control'},cc:'pb-w',price:'$120',link:'https://square.link/u/dbF1BPpW',b:{es:['Reduce drásticamente el apetito y ralentiza la digestión','Optimiza los niveles de azúcar en sangre','Ideal para pérdida de peso acelerada sin efecto rebote','Homeostasis metabólica avanzada'],en:['Drastically reduces appetite and slows digestion','Optimizes blood sugar levels','Ideal for accelerated weight loss without rebound effect','Advanced metabolic homeostasis']},m:{es:'Agonista dual GLP-1 / GIP',en:'Dual GLP-1 / GIP agonist'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:2,cat:'weight',name:'Tirzepatide',dose:'20mg',cl:{es:'Pérdida de Peso · Dosis Avanzada',en:'Weight Loss · Advanced Dose'},cc:'pb-w',price:'$165',link:'https://square.link/u/dbF1BPpW',b:{es:['Mismo principio que 10mg para tolerancia alta','Para fases intermedias y avanzadas del protocolo','Mayor potencia en control metabólico','Reducción sostenida de peso corporal'],en:['Same principle as 10mg for high tolerance','For intermediate and advanced protocol phases','Greater potency in metabolic control','Sustained body weight reduction']},m:{es:'Agonista dual GLP-1 / GIP — dosis avanzada',en:'Dual GLP-1 / GIP agonist — advanced dose'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'20mg/vial'}},
-  {id:3,cat:'weight',name:'Tirzepatide',dose:'30mg',cl:{es:'Pérdida de Peso · Dosis Máxima',en:'Weight Loss · Maximum Dose'},cc:'pb-w',price:'$225',link:'https://square.link/u/dbF1BPpW',b:{es:['Concentración más alta disponible','Diseñado para fase final de mantenimiento','Para pacientes con alta resistencia metabólica','Máximo control del apetito y metabolismo'],en:['Highest available concentration','Designed for final maintenance phase','For patients with high metabolic resistance','Maximum appetite and metabolism control']},m:{es:'Agonista dual GLP-1 / GIP — dosis máxima',en:'Dual GLP-1 / GIP agonist — maximum dose'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'30mg/vial'}},
-  {id:4,cat:'weight',name:'Retatrutide',dose:'10mg',cl:{es:'Quema de Grasa Extrema · Triple Acción',en:'Extreme Fat Burn · Triple Action'},cc:'pb-w',price:'$135',link:'https://square.link/u/b5j57UIX',b:{es:['La última innovación médica en pérdida de peso','Ataca tres receptores hormonales distintos','Rompe estancamientos de pérdida de peso','Acelera el metabolismo basal'],en:['Latest medical innovation in weight loss','Attacks three different hormonal receptors','Breaks weight loss plateaus','Accelerates basal metabolism']},m:{es:'Triple agonista GLP-1 / GIP / GCG',en:'Triple GLP-1 / GIP / GCG agonist'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:5,cat:'weight',name:'Retatrutide',dose:'20mg',cl:{es:'Quema de Grasa Extrema · Dosis Avanzada',en:'Extreme Fat Burn · Advanced Dose'},cc:'pb-w',price:'$210',link:'https://square.link/u/b5j57UIX',b:{es:['Concentración avanzada de triple acción','Máxima potencia en oxidación de grasa','Optimización de energía celular avanzada','Para protocolos de pérdida de peso intensivos'],en:['Advanced triple action concentration','Maximum fat oxidation potency','Advanced cellular energy optimization','For intensive weight loss protocols']},m:{es:'Triple agonista GLP-1 / GIP / GCG — dosis avanzada',en:'Triple GLP-1 / GIP / GCG agonist — advanced dose'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'20mg/vial'}},
-  {id:6,cat:'longevity',name:'NAD+',dose:'1000mg',cl:{es:'Longevidad Celular y Energía',en:'Cellular Longevity & Energy'},cc:'pb-l',price:'$135',link:'https://square.link/u/25Cs7KH6',b:{es:['El elíxir de la juventud celular','Repara el ADN celular y dispara la energía','Mejora el enfoque cognitivo y mental','Ralentiza el envejecimiento celular crónico'],en:['The elixir of cellular youth','Repairs cellular DNA and boosts energy','Improves cognitive and mental focus','Slows chronic cellular aging']},m:{es:'Coenzima esencial — producción energética celular',en:'Essential coenzyme — cellular energy production'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1000mg/vial'}},
-  {id:7,cat:'skin',name:'GHK-CU',dose:'100mg',cl:{es:'Regeneración Capilar y Antienvejecimiento',en:'Hair Regeneration & Anti-aging'},cc:'pb-sk',price:'$97.50',link:'https://square.link/u/cJ6l4mQJ',b:{es:['Péptido de cobre para producción masiva de colágeno','Terapia para revertir la caída del cabello','Rejuvenece la textura de la piel','Estimula la regeneración tisular profunda'],en:['Copper peptide for massive collagen production','Therapy to reverse hair loss','Rejuvenates skin texture','Stimulates deep tissue regeneration']},m:{es:'Péptido de cobre — activación de receptores de proliferación',en:'Copper peptide — proliferation receptor activation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'100mg/vial'}},
-  {id:8,cat:'antioxidant',name:'Glutathione',dose:'1500mg',cl:{es:'Desintoxicación y Brillo de la Piel',en:'Detoxification & Skin Glow'},cc:'pb-a',price:'$97.50',link:'https://square.link/u/sH5D4rWP',b:{es:['El maestro antioxidante del organismo','Desintoxica el hígado y limpia radicales libres','Promueve tono de piel más claro y radiante','Efecto glow visible desde las primeras semanas'],en:['The master antioxidant of the body','Detoxifies liver and eliminates free radicals','Promotes clearer and more radiant skin tone','Visible glow effect from the first weeks']},m:{es:'Tripéptido — antioxidante maestro y detox celular',en:'Tripeptide — master antioxidant and cellular detox'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1500mg/vial'}},
-  {id:9,cat:'body',name:'IGF-LR3',dose:'0.1mg',cl:{es:'Hipertrofia y Crecimiento Muscular',en:'Hypertrophy & Muscle Growth'},cc:'pb-b',price:'$90',link:'https://square.link/u/JnUVmEKJ',b:{es:['Factor de Crecimiento Insulínico de acción prolongada','Altamente codiciado en el fisicoculturismo','Creación de nuevas células musculares','Ganancia de fuerza y masa muscular'],en:['Long-acting Insulin Growth Factor','Highly sought after in bodybuilding','Creation of new muscle cells','Strength and muscle mass gain']},m:{es:'IGF — activación de receptores de proliferación muscular',en:'IGF — muscle proliferation receptor activation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'0.1mg/vial'}},
-  {id:10,cat:'body',name:'Tesamorelin',dose:'10mg',cl:{es:'Reducción de Grasa Visceral y HGH',en:'Visceral Fat Reduction & HGH'},cc:'pb-b',price:'$165',link:'https://square.link/u/VHZu2UFe',b:{es:['Estimula producción natural de hormona de crecimiento','Enfocado en pérdida de grasa abdominal profunda','Reduce grasa visceral de forma efectiva','Mejora de masa magra y composición corporal'],en:['Stimulates natural growth hormone production','Focused on deep abdominal fat loss','Effectively reduces visceral fat','Lean mass and body composition improvement']},m:{es:'Análogo GHRH — activación pituitaria natural',en:'GHRH analogue — natural pituitary activation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:11,cat:'cognitive',name:'NA-Semax',dose:'10mg',cl:{es:'Nootrópico · Enfoque y Memoria',en:'Nootropic · Focus & Memory'},cc:'pb-c',price:'$97.50',link:'https://square.link/u/OtQkDRZs',b:{es:['Péptido de optimización cerebral avanzada','Incrementa el factor neurotrófico BDNF','Mejora drásticamente la memoria y claridad mental','Aumenta la resistencia al estrés'],en:['Advanced brain optimization peptide','Increases neurotrophic factor BDNF','Dramatically improves memory and mental clarity','Increases stress resistance']},m:{es:'Análogo ACTH/MSH — optimización neural pulsátil',en:'ACTH/MSH analogue — pulsatile neural optimization'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:12,cat:'cognitive',name:'NA-Selank',dose:'10mg',cl:{es:'Nootrópico · Ansiedad y Bienestar',en:'Nootropic · Anxiety & Wellbeing'},cc:'pb-c',price:'$97.50',link:'https://square.link/u/H4JrqXy3',b:{es:['Péptido ansiolítico sin efectos sedantes','Balancea el sistema nervioso naturalmente','Reduce niveles de ansiedad y estrés','Mejora el estado de ánimo y optimiza el enfoque'],en:['Anxiolytic peptide without sedative effects','Naturally balances the nervous system','Reduces anxiety and stress levels','Improves mood and optimizes focus']},m:{es:'Análogo de tuftisina — estimulación GABAA',en:'Tuftsin analogue — GABAA stimulation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:13,cat:'weight',name:'Cagrilintide',dose:'10mg',cl:{es:'Sinergia Avanzada para Obesidad',en:'Advanced Synergy for Obesity'},cc:'pb-w',price:'$165',link:'https://square.link/u/RhmV66Bm',b:{es:['Actúa sobre los receptores de amilina','Al combinarse con Tirzepatide potencia la saciedad','Es el tratamiento premium del momento','Sinergia máxima para control de obesidad'],en:['Acts on amylin receptors','Combined with Tirzepatide maximizes satiety','The premium treatment of the moment','Maximum synergy for obesity control']},m:{es:'Análogo de amilina de acción prolongada',en:'Long-acting amylin analogue'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:14,cat:'body',name:'CJC-1295 N-DAC',dose:'10mg',cl:{es:'Optimización Hormonal y Recuperación',en:'Hormonal Optimization & Recovery'},cc:'pb-b',price:'$120',link:'https://square.link/u/95xuzqNO',b:{es:['Péptido de liberación pulsátil de corta duración','Induce picos naturales de hormona de crecimiento','Favorece recuperación rápida y efectiva','Mejora composición corporal sin permanencia prolongada'],en:['Short-duration pulsatile release peptide','Induces natural growth hormone peaks','Promotes rapid and effective recovery','Improves body composition without prolonged retention']},m:{es:'Péptido GHRH — estimulación pituitaria pulsátil',en:'GHRH peptide — pulsatile pituitary stimulation'},s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
-  {id:15,cat:'body',name:'BAC Water',dose:'3ml',cl:{es:'Diluente Clínico Especializado',en:'Specialized Clinical Diluent'},cc:'pb-b',price:'$15',link:'https://square.link/u/to4MisgN',b:{es:['Agua bacteriostática con alcohol bencílico','Para reconstitución segura de péptidos','Mantiene esterilidad del vial hasta 28 días','Presentación estándar para uso investigativo'],en:['Bacteriostatic water with benzyl alcohol','For safe peptide reconstitution','Maintains vial sterility for up to 28 days','Standard presentation for research use']},m:{es:'Agua bacteriostática — disolvente estéril especializado',en:'Bacteriostatic water — specialized sterile solvent'},s:{pureza:'Estéril',formato:'Líquido',storage:'Temperatura ambiente',conc:'3ml/vial'}},
-  {id:16,cat:'body',name:'BAC Water',dose:'10ml',cl:{es:'Diluente Clínico Especializado',en:'Specialized Clinical Diluent'},cc:'pb-b',price:'$22.50',link:'https://square.link/u/to4MisgN',b:{es:['Agua bacteriostática de alta capacidad','Ideal para múltiples viales o kits mensuales','Para reconstitución segura de péptidos','Presentación de mayor volumen para investigación'],en:['High capacity bacteriostatic water','Ideal for multiple vials or monthly kits','For safe peptide reconstitution','Larger volume presentation for research']},m:{es:'Agua bacteriostática — alta capacidad para reconstitución',en:'Bacteriostatic water — high capacity for reconstitution'},s:{pureza:'Estéril',formato:'Líquido',storage:'Temperatura ambiente',conc:'10ml/vial'}}
+  {id:1,cat:'weight',name:'Tirzepatide',dose:'10mg · 20mg · 30mg',
+   variants:[{label:'10mg',price:'$120'},{label:'20mg',price:'$165'},{label:'30mg',price:'$195'}],
+   cl:{es:'Pérdida de Peso · Control Metabólico',en:'Weight Loss · Metabolic Control'},cc:'pb-w',
+   price:'$120 — $195',link:'https://square.link/u/dbF1BPpW',
+   b:{es:['🔥 Reduce hasta un 20% del peso corporal en estudios clínicos','⚡ Suprime el apetito actuando directamente en el cerebro','🍽️ Ralentiza el vaciado gástrico generando saciedad prolongada','💉 Regula la insulina y mejora el metabolismo de la glucosa'],
+      en:['🔥 Reduces up to 20% of body weight in clinical studies','⚡ Suppresses appetite by acting directly on the brain','🍽️ Slows gastric emptying generating prolonged satiety','💉 Regulates insulin and improves glucose metabolism']},
+   desc:{es:'El péptido estrella para pérdida de peso. Como agonista dual GLP-1/GIP, actúa sobre dos receptores hormonales simultáneamente — controlando el apetito, mejorando la sensibilidad a la insulina y reduciendo la ingesta calórica de forma sostenida sin efecto rebote. Disponible en 3 concentraciones para diferentes etapas del protocolo.',
+         en:'The star peptide for weight loss. As a dual GLP-1/GIP agonist, it acts on two hormonal receptors simultaneously — controlling appetite, improving insulin sensitivity and reducing caloric intake sustainably without rebound effect. Available in 3 concentrations for different protocol stages.'},
+   m:{es:'Agonista dual GLP-1 / GIP',en:'Dual GLP-1 / GIP agonist'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg / 20mg / 30mg'}},
+
+  {id:2,cat:'weight',name:'Retatrutide',dose:'10mg · 20mg',
+   variants:[{label:'10mg',price:'$135'},{label:'20mg',price:'$195'}],
+   cl:{es:'Quema de Grasa Extrema · Triple Acción',en:'Extreme Fat Burn · Triple Action'},cc:'pb-w',
+   price:'$135 — $195',link:'https://square.link/u/b5j57UIX',
+   b:{es:['🚀 Triple agonista — la molécula más avanzada del mercado','💪 Rompe estancamientos donde otros péptidos fallan','🔥 Quema grasa visceral y subcutánea simultáneamente','⚡ Acelera el metabolismo basal de forma significativa'],
+      en:['🚀 Triple agonist — the most advanced molecule on the market','💪 Breaks plateaus where other peptides fail','🔥 Burns visceral and subcutaneous fat simultaneously','⚡ Significantly accelerates basal metabolism']},
+   desc:{es:'La innovación más reciente en pérdida de peso. A diferencia del Tirzepatide que actúa sobre 2 receptores, el Retatrutide activa 3 receptores hormonales (GLP-1, GIP y Glucagón) logrando resultados superiores especialmente en casos de estancamiento. Ideal para protocolos avanzados o cuando se busca máxima efectividad.',
+         en:'The most recent innovation in weight loss. Unlike Tirzepatide which acts on 2 receptors, Retatrutide activates 3 hormonal receptors (GLP-1, GIP and Glucagon) achieving superior results especially in plateau cases. Ideal for advanced protocols or when maximum effectiveness is sought.'},
+   m:{es:'Triple agonista GLP-1 / GIP / GCG',en:'Triple GLP-1 / GIP / GCG agonist'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg / 20mg'}},
+
+  {id:3,cat:'longevity',name:'NAD+',dose:'1000mg',
+   variants:null,
+   cl:{es:'Longevidad Celular y Energía',en:'Cellular Longevity & Energy'},cc:'pb-l',
+   price:'$135',link:'https://square.link/u/25Cs7KH6',
+   b:{es:['🧬 Repara el ADN celular dañado por el envejecimiento','⚡ Dispara la energía física y mental desde adentro','🧠 Mejora la memoria, concentración y claridad mental','🕰️ Ralentiza los procesos de envejecimiento celular crónico'],
+      en:['🧬 Repairs cellular DNA damaged by aging','⚡ Boosts physical and mental energy from within','🧠 Improves memory, concentration and mental clarity','🕰️ Slows chronic cellular aging processes']},
+   desc:{es:'El NAD+ es una coenzima presente en todas las células vivas, esencial para la producción de energía celular (ATP) y la reparación del ADN. Sus niveles declinan naturalmente con la edad. Su reposición es estudiada como uno de los métodos más prometedores para combatir el envejecimiento celular, mejorar la vitalidad y optimizar la función cognitiva.',
+         en:'NAD+ is a coenzyme present in all living cells, essential for cellular energy production (ATP) and DNA repair. Its levels naturally decline with age. Its replenishment is studied as one of the most promising methods to combat cellular aging, improve vitality and optimize cognitive function.'},
+   m:{es:'Coenzima esencial — producción energética celular',en:'Essential coenzyme — cellular energy production'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1000mg/vial'}},
+
+  {id:4,cat:'skin',name:'GHK-CU',dose:'100mg',
+   variants:null,
+   cl:{es:'Regeneración Capilar y Antienvejecimiento',en:'Hair Regeneration & Anti-aging'},cc:'pb-sk',
+   price:'$97.50',link:'https://square.link/u/cJ6l4mQJ',
+   b:{es:['💆 Estimula producción masiva de colágeno y elastina','💇 Revierte activamente la caída y debilitamiento del cabello','✨ Rejuvenece y firmeza la textura de la piel visiblemente','🔬 Promueve la regeneración de tejidos dañados'],
+      en:['💆 Stimulates massive production of collagen and elastin','💇 Actively reverses hair loss and weakening','✨ Visibly rejuvenates and firms skin texture','🔬 Promotes regeneration of damaged tissues']},
+   desc:{es:'El GHK-Cu (Gly-His-Lys Cobre) es un péptido de cobre natural que ocurre en el plasma humano y declina con la edad. Es ampliamente estudiado por su capacidad para activar los fibroblastos de la piel, estimular la síntesis de colágeno, revertir la miniaturización del folículo capilar y promover la regeneración tisular general. Uno de los favoritos en protocolos antienvejecimiento.',
+         en:'GHK-Cu (Gly-His-Lys Copper) is a natural copper peptide that occurs in human plasma and declines with age. It is widely studied for its ability to activate skin fibroblasts, stimulate collagen synthesis, reverse hair follicle miniaturization and promote general tissue regeneration. One of the favorites in anti-aging protocols.'},
+   m:{es:'Péptido de cobre — activación de receptores de proliferación',en:'Copper peptide — proliferation receptor activation'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'100mg/vial'}},
+
+  {id:5,cat:'antioxidant',name:'Glutathione',dose:'1500mg',
+   variants:null,
+   cl:{es:'Desintoxicación y Brillo de la Piel',en:'Detoxification & Skin Glow'},cc:'pb-a',
+   price:'$97.50',link:'https://square.link/u/sH5D4rWP',
+   b:{es:['🛡️ El antioxidante más poderoso producido por el cuerpo','🫀 Desintoxica el hígado y neutraliza radicales libres','✨ Aclara el tono de piel y produce efecto glow visible','🧠 Protege neuronas y mejora función cognitiva'],
+      en:['🛡️ The most powerful antioxidant produced by the body','🫀 Detoxifies the liver and neutralizes free radicals','✨ Brightens skin tone and produces visible glow effect','🧠 Protects neurons and improves cognitive function']},
+   desc:{es:'El Glutatión es conocido como el "antioxidante maestro" del cuerpo humano. Compuesto por tres aminoácidos (glicina, cisteína y glutamato), protege cada célula del daño oxidativo, neutraliza toxinas hepáticas y es ampliamente estudiado por sus efectos en el aclaramiento de la piel, la desintoxicación profunda y la neuroprotección. Esencial en protocolos de bienestar integral.',
+         en:'Glutathione is known as the body\'s "master antioxidant". Composed of three amino acids (glycine, cysteine and glutamate), it protects every cell from oxidative damage, neutralizes liver toxins and is widely studied for its effects on skin brightening, deep detoxification and neuroprotection. Essential in comprehensive wellness protocols.'},
+   m:{es:'Tripéptido — antioxidante maestro y detox celular',en:'Tripeptide — master antioxidant and cellular detox'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1500mg/vial'}},
+
+  {id:6,cat:'body',name:'IGF-LR3',dose:'1mg',
+   variants:null,
+   cl:{es:'Hipertrofia y Crecimiento Muscular',en:'Hypertrophy & Muscle Growth'},cc:'pb-b',
+   price:'$90',link:'https://square.link/u/JnUVmEKJ',
+   b:{es:['💪 Estimula hiperplasia muscular — crea nuevas células musculares','⚡ Vida media prolongada de hasta 20 horas en investigación','🔥 Reduce grasa corporal mientras aumenta masa magra','🏋️ Acelerador de recuperación muscular post-ejercicio'],
+      en:['💪 Stimulates muscle hyperplasia — creates new muscle cells','⚡ Extended half-life of up to 20 hours in research','🔥 Reduces body fat while increasing lean mass','🏋️ Accelerates post-exercise muscle recovery']},
+   desc:{es:'El IGF-1 LR3 (Long R3 Insulin-like Growth Factor) es una versión modificada del factor de crecimiento insulínico con vida media extendida. A diferencia del IGF-1 regular, el LR3 no se une a las proteínas de unión IGF, lo que prolonga su actividad anabólica. Es ampliamente estudiado en el campo del crecimiento muscular, la hiperplasia de fibras y la mejora de la composición corporal.',
+         en:'IGF-1 LR3 (Long R3 Insulin-like Growth Factor) is a modified version of insulin-like growth factor with extended half-life. Unlike regular IGF-1, LR3 does not bind to IGF binding proteins, prolonging its anabolic activity. Widely studied in the field of muscle growth, fiber hyperplasia and body composition improvement.'},
+   m:{es:'IGF — activación de receptores de proliferación muscular',en:'IGF — muscle proliferation receptor activation'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'1mg/vial'}},
+
+  {id:7,cat:'body',name:'Tesamorelin',dose:'10mg',
+   variants:null,
+   cl:{es:'Reducción de Grasa Visceral y HGH',en:'Visceral Fat Reduction & HGH'},cc:'pb-b',
+   price:'$142.50',link:'https://square.link/u/VHZu2UFe',
+   b:{es:['🔬 Único péptido aprobado específicamente para grasa visceral','📉 Reduce grasa abdominal profunda sin afectar grasa subcutánea','💪 Mejora la composición corporal y aumenta masa magra','⚡ Estimula la GH de forma pulsátil y natural'],
+      en:['🔬 Only peptide specifically approved for visceral fat','📉 Reduces deep abdominal fat without affecting subcutaneous fat','💪 Improves body composition and increases lean mass','⚡ Stimulates GH in a pulsatile and natural way']},
+   desc:{es:'La Tesamorelina es un análogo sintético del GHRH (hormona liberadora de hormona de crecimiento) que estimula la producción natural de GH desde la glándula pituitaria. Es particularmente estudiada por su capacidad de reducir la grasa visceral abdominal — el tipo de grasa más peligroso para la salud cardiovascular y metabólica — sin los efectos secundarios de la GH exógena.',
+         en:'Tesamorelin is a synthetic analogue of GHRH (growth hormone-releasing hormone) that stimulates natural GH production from the pituitary gland. It is particularly studied for its ability to reduce abdominal visceral fat — the most dangerous type of fat for cardiovascular and metabolic health — without the side effects of exogenous GH.'},
+   m:{es:'Análogo GHRH — activación pituitaria natural',en:'GHRH analogue — natural pituitary activation'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+
+  {id:8,cat:'cognitive',name:'NA-Semax',dose:'10mg',
+   variants:null,
+   cl:{es:'Nootrópico · Enfoque y Memoria',en:'Nootropic · Focus & Memory'},cc:'pb-c',
+   price:'$97.50',link:'https://square.link/u/OtQkDRZs',
+   b:{es:['🧠 Aumenta el BDNF — proteína clave del crecimiento neuronal','📚 Mejora drásticamente la memoria a corto y largo plazo','⚡ Aumenta la velocidad de procesamiento mental','😌 Reduce el estrés oxidativo cerebral'],
+      en:['🧠 Increases BDNF — key protein for neuronal growth','📚 Dramatically improves short and long-term memory','⚡ Increases mental processing speed','😌 Reduces cerebral oxidative stress']},
+   desc:{es:'El NA-Semax es una versión mejorada del Semax original, con mayor biodisponibilidad y duración. Derivado de la hormona ACTH/MSH, es estudiado ampliamente en Rusia y Europa por sus efectos nootrópicos. Incrementa los niveles de BDNF (factor neurotrófico), mejora la plasticidad sináptica, potencia el foco mental y protege las neuronas del daño oxidativo. Ideal para profesionales, estudiantes y personas que buscan optimización cognitiva.',
+         en:'NA-Semax is an improved version of the original Semax, with greater bioavailability and duration. Derived from ACTH/MSH hormone, it is widely studied in Russia and Europe for its nootropic effects. Increases BDNF levels (neurotrophic factor), improves synaptic plasticity, enhances mental focus and protects neurons from oxidative damage. Ideal for professionals, students and those seeking cognitive optimization.'},
+   m:{es:'Análogo ACTH/MSH — optimización neural pulsátil',en:'ACTH/MSH analogue — pulsatile neural optimization'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+
+  {id:9,cat:'cognitive',name:'NA-Selank',dose:'10mg',
+   variants:null,
+   cl:{es:'Nootrópico · Ansiedad y Bienestar',en:'Nootropic · Anxiety & Wellbeing'},cc:'pb-c',
+   price:'$97.50',link:'https://square.link/u/H4JrqXy3',
+   b:{es:['😌 Reduce ansiedad y estrés sin sedación ni dependencia','🧠 Mejora el aprendizaje y la consolidación de memoria','⚖️ Balancea neurotransmisores de forma natural','💆 Mejora el estado de ánimo y bienestar general'],
+      en:['😌 Reduces anxiety and stress without sedation or dependence','🧠 Improves learning and memory consolidation','⚖️ Naturally balances neurotransmitters','💆 Improves mood and general wellbeing']},
+   desc:{es:'El NA-Selank es un péptido ansiolítico sintético derivado de la tuftisina, con propiedades únicas que lo diferencian de los ansiolíticos convencionales: no produce sedación, no genera tolerancia ni dependencia. Actúa modulando el sistema GABA y aumentando los niveles de BDNF y serotonina. Es estudiado como alternativa natural para el manejo de ansiedad, estrés crónico y mejora del bienestar mental.',
+         en:'NA-Selank is a synthetic anxiolytic peptide derived from tuftsin, with unique properties that differentiate it from conventional anxiolytics: it does not produce sedation, tolerance or dependence. It acts by modulating the GABA system and increasing BDNF and serotonin levels. Studied as a natural alternative for managing anxiety, chronic stress and improving mental wellbeing.'},
+   m:{es:'Análogo de tuftisina — modulación GABA y serotonina',en:'Tuftsin analogue — GABA and serotonin modulation'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+
+  {id:10,cat:'weight',name:'Cagrilintide',dose:'10mg',
+   variants:null,
+   cl:{es:'Sinergia Avanzada para Obesidad',en:'Advanced Synergy for Obesity'},cc:'pb-w',
+   price:'$165',link:'https://square.link/u/RhmV66Bm',
+   b:{es:['🎯 Análogo de amilina de nueva generación','🍽️ Potencia la saciedad al combinarse con Tirzepatide','⏳ Retrasa el vaciado gástrico de forma prolongada','🏆 El protocolo CagriSema es el más potente del mercado'],
+      en:['🎯 New generation amylin analogue','🍽️ Enhances satiety when combined with Tirzepatide','⏳ Delays gastric emptying in a prolonged manner','🏆 The CagriSema protocol is the most potent on the market']},
+   desc:{es:'El Cagrilintide es un análogo de amilina de acción prolongada desarrollado para potenciar los efectos de los agonistas GLP-1. Solo ya produce pérdida de peso significativa, pero su verdadero poder se libera al combinarlo con Semaglutide o Tirzepatide — protocolo conocido como CagriSema, actualmente considerado uno de los más efectivos en investigación clínica para obesidad severa.',
+         en:'Cagrilintide is a long-acting amylin analogue developed to enhance the effects of GLP-1 agonists. Alone it produces significant weight loss, but its true power is released when combined with Semaglutide or Tirzepatide — a protocol known as CagriSema, currently considered one of the most effective in clinical research for severe obesity.'},
+   m:{es:'Análogo de amilina — acción prolongada sobre receptores AMY',en:'Amylin analogue — prolonged action on AMY receptors'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+
+  {id:11,cat:'body',name:'CJC-1295 N-DAC',dose:'10mg',
+   variants:null,
+   cl:{es:'Optimización Hormonal y Recuperación',en:'Hormonal Optimization & Recovery'},cc:'pb-b',
+   price:'$120',link:'https://square.link/u/95xuzqNO',
+   b:{es:['📈 Incrementa los niveles de GH e IGF-1 de forma natural','🔄 Estimula múltiples pulsos de GH a lo largo del día','💪 Acelera recuperación muscular y reducción de grasa','🌙 Mayor beneficio cuando se aplica antes de dormir'],
+      en:['📈 Naturally increases GH and IGF-1 levels','🔄 Stimulates multiple GH pulses throughout the day','💪 Accelerates muscle recovery and fat reduction','🌙 Greatest benefit when applied before sleep']},
+   desc:{es:'El CJC-1295 sin DAC (sin Drug Affinity Complex) es un péptido GHRH que estimula la pituitaria para producir GH en pulsos naturales — imitando el ritmo fisiológico del cuerpo. A diferencia de la versión con DAC (media vida de días), el N-DAC tiene vida corta (30 min) generando picos de GH más fisiológicos. Frecuentemente usado junto con GHRP para maximizar la liberación de GH.',
+         en:'CJC-1295 without DAC (without Drug Affinity Complex) is a GHRH peptide that stimulates the pituitary to produce GH in natural pulses — mimicking the body\'s physiological rhythm. Unlike the DAC version (half-life of days), N-DAC has a short life (30 min) generating more physiological GH peaks. Frequently used together with GHRP to maximize GH release.'},
+   m:{es:'Péptido GHRH — estimulación pituitaria pulsátil sin DAC',en:'GHRH peptide — pulsatile pituitary stimulation without DAC'},
+   s:{pureza:'≥99.9%',formato:'Liofilizado',storage:'-20°C a -80°C',conc:'10mg/vial'}},
+
+  {id:12,cat:'body',name:'BAC Water',dose:'3ml · 10ml',
+   variants:[{label:'3ml',price:'$12'},{label:'10ml',price:'$22.50'}],
+   cl:{es:'Diluente Clínico Especializado',en:'Specialized Clinical Diluent'},cc:'pb-b',
+   price:'$12 — $22.50',link:'https://square.link/u/to4MisgN',
+   b:{es:['💧 Agua bacteriostática con 0.9% de alcohol bencílico','🧪 Esencial para reconstitución segura de péptidos','🛡️ Mantiene esterilidad del vial hasta 28 días','📦 Disponible en 3ml (estándar) y 10ml (kits mensuales)'],
+      en:['💧 Bacteriostatic water with 0.9% benzyl alcohol','🧪 Essential for safe peptide reconstitution','🛡️ Maintains vial sterility for up to 28 days','📦 Available in 3ml (standard) and 10ml (monthly kits)']},
+   desc:{es:'El Agua Bacteriostática es el disolvente estándar para la reconstitución de péptidos liofilizados. Contiene 0.9% de alcohol bencílico que inhibe el crecimiento bacteriano, permitiendo múltiples extracciones del mismo vial durante hasta 28 días de forma segura. Esencial para cualquier protocolo de péptidos — sin ella no es posible preparar correctamente los viales.',
+         en:'Bacteriostatic Water is the standard solvent for reconstituting lyophilized peptides. Contains 0.9% benzyl alcohol that inhibits bacterial growth, allowing multiple extractions from the same vial for up to 28 days safely. Essential for any peptide protocol — without it, vials cannot be properly prepared.'},
+   m:{es:'Agua bacteriostática — disolvente estéril para reconstitución',en:'Bacteriostatic water — sterile solvent for reconstitution'},
+   s:{pureza:'Estéril certificada',formato:'Líquido',storage:'Temperatura ambiente',conc:'3ml / 10ml'}}
 ];
 
 const chkSVG=`<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="13" height="13"><polyline points="20 6 9 17 4 12" stroke="url(#goldG)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -1043,7 +1166,8 @@ function renderProducts(f){
     if(f==='all'&&b.getAttribute('data-es')==='Todos')b.classList.add('active');
     if(f!=='all'&&b.onclick?.toString().includes(`'${f}'`))b.classList.add('active');
   });
-  g.innerHTML=list.map((p,i)=>`
+  
+g.innerHTML=list.map((p,i)=>`
     <div class="pcard" style="opacity:0;transform:translateY(30px);transition:opacity .5s ${i*.07}s ease,transform .5s ${i*.07}s ease,border-color .4s,box-shadow .4s,transform .4s">
       <div class="pcard-glow"></div>
       <div class="ptop">
@@ -1055,14 +1179,21 @@ function renderProducts(f){
         <div class="pdose">${p.dose} · ${lang==='es'?'Péptido Liofilizado Premium':'Premium Lyophilized Peptide'}</div>
         <ul class="pbens">${p.b[lang].slice(0,3).map(b=>`<li>${chkSVG}<span>${b}</span></li>`).join('')}</ul>
       </div>
-      <div class="pcard-footer" style="padding:1.2rem 1.5rem;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center;gap:8px;">
-        ${checkRegistered() ? `
-          <div><span class="pprice-l">${lang==='es'?'Precio':'Price'}</span><div class="pprice">${p.price}</div></div>
-          <a href="${p.link}" target="_blank" class="pbuy">${cartSVG}${lang==='es'?'Comprar':'Buy Now'}</a>
-        ` : `
-          <div class="price-locked"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>${lang==='es'?'Regístrate para ver precio':'Register to see price'}</div>
-          <button class="pbuy" onclick="openGate()" style="background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--border);">${lang==='es'?'Ver Precio':'See Price'}</button>
-        `}
+      <div class="pcard-footer" style="padding:1.2rem 1.5rem;border-top:1px solid var(--border-s);">
+        ${p.variants ? `<div class="variant-selector">${p.variants.map(v=>`<button class="variant-btn" onclick="event.stopPropagation()">${v.label}</button>`).join('')}</div>` : ''}
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;${p.variants?'margin-top:8px;':''}">
+          ${checkRegistered() ? `
+            <div><span class="pprice-l">${lang==='es'?'Precio':'Price'}</span><div class="pprice">${p.price}</div></div>
+            <a href="${p.link}" target="_blank" class="pbuy">${cartSVG}${lang==='es'?'Comprar':'Buy Now'}</a>
+          ` : `
+            <div class="price-locked"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>${lang==='es'?'Regístrate para ver precio':'Register to see price'}</div>
+            <button class="pbuy" onclick="openGate()" style="background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--border);">${lang==='es'?'Ver Precio':'See Price'}</button>
+          `}
+        </div>
+        <div class="disclaimer-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>${lang==='es'?'Solo para uso en investigación · No apto para consumo humano':'For research use only · Not for human consumption'}</span>
+        </div>
       </div>
     </div>`).join('');
   setTimeout(()=>g.querySelectorAll('.pcard').forEach(c=>{c.style.opacity='1';c.style.transform='translateY(0)';}),60);
@@ -1076,7 +1207,8 @@ function openMo(id){
   document.getElementById('moBody').innerHTML=`
     <div class="mb">
       <div class="mb-dose">${p.cl[l]} · ${p.m[l]}</div>
-      <div class="mb-st">${l==='es'?'Beneficios Clave':'Key Benefits'}</div>
+      ${p.desc ? `<div style="font-size:13px;color:var(--gray-light);line-height:1.8;margin-bottom:1.2rem;padding:12px;background:rgba(255,255,255,.03);border-radius:8px;border-left:2px solid var(--border);">${p.desc[l]}</div>` : ''}
+      <div class="mb-st">${l==='es'?'Bondades y Beneficios':'Benefits & Properties'}</div>
       <ul class="mb-bens">${p.b[l].map(b=>`<li>${chkSVG}<span>${b}</span></li>`).join('')}</ul>
       <div class="mb-st">${l==='es'?'Especificaciones':'Specifications'}</div>
       <div class="mb-specs">
