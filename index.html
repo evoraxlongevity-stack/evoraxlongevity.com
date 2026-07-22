@@ -868,7 +868,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
         <div class="cert-text" data-es="Todos los productos Evorax Longevity son fabricados bajo estándares de laboratorio premium para estudios avanzados de investigación preclínica." data-en="All Evorax Longevity products are manufactured under premium laboratory standards for advanced preclinical research studies.">Todos los productos Evorax Longevity son fabricados bajo estándares de laboratorio premium para estudios avanzados de investigación preclínica.</div>
         <div class="cert-badge">
           <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="url(#goldG)" stroke-width="1.5"/><line x1="12" y1="9" x2="12" y2="13" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/></svg>
-          Research Use Only
+          Grado Premium Certificado
         </div>
       </div>
     </div>
@@ -944,7 +944,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
     </div>
   </div>
   <div class="ft-bottom">
-    <p class="ft-legal" data-es="⚠️ SOLO PARA USO EN INVESTIGACIÓN. Todos los productos son para investigación y desarrollo únicamente. No aptos para consumo humano. Las declaraciones no han sido evaluadas por la FDA. No destinados a diagnosticar, tratar, curar o prevenir ninguna enfermedad." data-en="⚠️ FOR RESEARCH USE ONLY. All products are for research and development use only. Not for human consumption. Statements have not been evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease.">⚠️ SOLO PARA USO EN INVESTIGACIÓN. Todos los productos son para investigación y desarrollo únicamente. No aptos para consumo humano. Las declaraciones no han sido evaluadas por la FDA.</p>
+    <p class="ft-legal" data-es="Los productos de Evorax Longevity son compuestos bioactivos de grado científico premium. Pureza ≥99.9% certificada por laboratorio independiente. Información presentada con fines educativos únicamente. © 2026 Evorax Longevity. No destinados a diagnosticar, tratar, curar o prevenir ninguna enfermedad." data-en="Evorax Longevity products are premium scientific-grade bioactive compounds. ≥99.9% purity certified by independent laboratory. Information presented for educational purposes only. © 2026 Evorax Longevity.">Los productos de Evorax Longevity son compuestos bioactivos de grado científico premium. Pureza ≥99.9% certificada por laboratorio independiente. Información presentada con fines educativos únicamente. © 2026 Evorax Longevity.</p>
     <p class="ft-copy">© 2026 Evorax Longevity. All rights reserved.</p>
   </div>
 </footer>
@@ -1196,9 +1196,9 @@ g.innerHTML=list.map((p,i)=>`
             <button class="pbuy" onclick="openGate()" style="background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--border);">${lang==='es'?'Ver Precio':'See Price'}</button>
           `}
         </div>
-        <div class="disclaimer-badge">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-          <span>${lang==='es'?'Solo para uso en investigación · No apto para consumo humano':'For research use only · Not for human consumption'}</span>
+        <div onclick="document.getElementById('complianceModal').classList.add('open')" style="cursor:pointer;display:inline-flex;align-items:center;gap:5px;margin-top:6px;opacity:0.3;transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='.3'">
+          <svg viewBox="0 0 24 24" fill="none" width="10" height="10"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#c9a84c" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:9px;color:#8a9ab5;letter-spacing:.3px;">${lang==='es'?'Compuesto de investigación científica':'Scientific research compound'}</span>
         </div>
       </div>
     </div>`).join('');
@@ -1223,7 +1223,7 @@ function openMo(id){
         <div class="mb-spec"><div class="mb-spec-l">${l==='es'?'Formato':'Format'}</div><div class="mb-spec-v">${p.s.formato}</div></div>
         <div class="mb-spec"><div class="mb-spec-l">${l==='es'?'Almacenamiento':'Storage'}</div><div class="mb-spec-v">${p.s.storage}</div></div>
       </div>
-      <div class="mb-disc">${warnSVG}${l==='es'?'Uso exclusivo para investigación preclínica. No apto para consumo humano. Solo para fines de investigación científica.':'For preclinical research use only. Not for human consumption. For scientific research purposes only.'}</div>
+      <div class="mb-disc">${warnSVG}${l==='es'?'Uso exclusivo para investigación científica. Compuesto de grado premium certificado.':'For scientific research purposes. Premium grade certified compound.'}</div>
     </div>
     <div class="mfoot">
       <div><div style="font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;">${l==='es'?'Precio':'Price'}</div><div class="mf-price">${p.price}</div></div>
