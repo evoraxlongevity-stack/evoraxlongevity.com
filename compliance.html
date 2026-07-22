@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Información Regulatoria & Compliance | Evorax Longevity</title>
+<meta name="description" content="Información regulatoria sobre los productos de investigación científica de Evorax Longevity. Qué son los péptidos de investigación, su marco legal y nuestro compromiso con la calidad.">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#071220;color:#fff;line-height:1.6;}
+:root{
+  --navy:#071220;--navy-mid:#0b1a2e;--navy-light:#102038;
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dark:#8a6520;
+  --gray:#8a9ab5;--gray-light:#b8c4d4;
+  --border:rgba(201,168,76,.25);--border-s:rgba(255,255,255,.06);
+}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:70px;background:rgba(7,18,32,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-s);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);}
+.nav-brand{font-family:'Montserrat',sans-serif;font-weight:900;font-size:16px;letter-spacing:4px;background:linear-gradient(135deg,#8a6520,#e8c97a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-sub{font-size:9px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.nav-back{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:8px;border:1px solid var(--border);color:var(--gray-light);font-size:12px;font-weight:600;letter-spacing:1px;text-decoration:none;transition:all .3s;text-transform:uppercase;}
+.nav-back:hover{border-color:var(--gold);color:var(--gold);}
+.nav-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* HERO */
+.hero{padding:5rem 3rem 3rem;text-align:center;background:linear-gradient(180deg,var(--navy-light) 0%,var(--navy) 100%);border-bottom:1px solid var(--border-s);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(201,168,76,.05) 0%,transparent 70%);}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:10px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:30px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;margin-bottom:1rem;line-height:1.1;}
+.hero-sub{font-size:16px;color:var(--gray-light);max-width:600px;margin:0 auto;line-height:1.8;}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:4rem 2rem;}
+
+/* SECTION */
+.section{margin-bottom:3.5rem;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:8px;}
+.section-label::before{content:'';width:20px;height:1px;background:var(--gold);}
+.section h2{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:1.2rem;color:#fff;}
+.section p{font-size:14px;color:var(--gray-light);line-height:1.9;margin-bottom:1rem;}
+.section p:last-child{margin-bottom:0;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.5rem;}
+.card{background:var(--navy-mid);border:1px solid var(--border-s);border-radius:14px;padding:1.5rem;transition:border-color .3s;}
+.card:hover{border-color:var(--border);}
+.card-icon{width:44px;height:44px;border-radius:10px;background:rgba(201,168,76,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;}
+.card-icon svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.card h3{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;margin-bottom:.5rem;}
+.card p{font-size:12px;color:var(--gray-light);line-height:1.7;}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;margin-top:1.5rem;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:10px 14px;border-bottom:1px solid var(--border);}
+td{padding:12px 14px;border-bottom:1px solid var(--border-s);color:var(--gray-light);vertical-align:top;}
+td:first-child{font-weight:600;color:#fff;white-space:nowrap;}
+tr:last-child td{border-bottom:none;}
+
+/* DO/DONT */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.5rem;}
+.do-box,.dont-box{border-radius:12px;padding:1.5rem;}
+.do-box{background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);}
+.dont-box{background:rgba(232,120,120,.04);border:1px solid rgba(232,120,120,.15);}
+.do-box h4{color:#1d9e75;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;margin-bottom:1rem;letter-spacing:1px;}
+.dont-box h4{color:#e87878;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;margin-bottom:1rem;letter-spacing:1px;}
+.do-box ul,.dont-box ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.do-box li,.dont-box li{font-size:12px;color:var(--gray-light);line-height:1.6;display:flex;gap:8px;align-items:flex-start;}
+.do-box li::before{content:'✓';color:#1d9e75;font-weight:700;flex-shrink:0;}
+.dont-box li::before{content:'✗';color:#e87878;font-weight:700;flex-shrink:0;}
+
+/* HIGHLIGHT BOX */
+.highlight{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(201,168,76,.03));border:1px solid var(--border);border-radius:14px;padding:2rem;margin-top:1.5rem;}
+.highlight-title{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:var(--gold);margin-bottom:.8rem;}
+.highlight p{font-size:13px;color:var(--gray-light);line-height:1.8;}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:10px;margin-top:1.5rem;}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:var(--navy-mid);border:1px solid var(--border-s);border-radius:10px;}
+.check-icon{width:22px;height:22px;border-radius:6px;background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.check-icon svg{width:12px;height:12px;stroke:#1d9e75;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.check-text{font-size:13px;color:var(--gray-light);line-height:1.6;}
+.check-text strong{color:#fff;}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border-s);margin:3rem 0;}
+
+/* FOOTER */
+footer{background:#050e1a;border-top:1px solid var(--border-s);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.ft-text{font-size:11px;color:rgba(138,154,181,.5);line-height:1.7;max-width:500px;}
+.ft-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--gold);text-decoration:none;font-weight:600;transition:opacity .2s;}
+.ft-back:hover{opacity:.7;}
+.ft-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
+
+@media(max-width:768px){
+  nav{padding:0 1.2rem;}
+  .hero{padding:3rem 1.2rem 2rem;}
+  .main{padding:2.5rem 1.2rem;}
+  .cards,.do-dont{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="data:image/jpeg;base64,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" alt="Evorax Longevity">
+    <div>
+      <div class="nav-brand">EVORAX</div>
+      <div class="nav-sub">Longevity</div>
+    </div>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver al inicio
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Transparencia y Confianza</div>
+  <h1>Información Regulatoria<br>& Compliance</h1>
+  <p class="hero-sub">En Evorax Longevity operamos con total transparencia. Esta página explica qué son nuestros productos, el marco legal bajo el que operamos y nuestro compromiso con la calidad científica.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-label">¿Qué son?</div>
+    <h2>Compuestos Bioactivos de Investigación Científica</h2>
+    <p>Los productos que comercializa Evorax Longevity son <strong style="color:#fff;">compuestos bioactivos y péptidos sintéticos de grado científico</strong>, catalogados como productos de investigación. Esta es una categoría legal y ampliamente establecida en la industria de las ciencias de la vida en Estados Unidos.</p>
+    <p>Los péptidos son cadenas cortas de aminoácidos — los bloques fundamentales de las proteínas — que han sido objeto de extensa investigación científica por su capacidad de interactuar con receptores biológicos específicos. Son estudiados en laboratorios, universidades y centros de investigación en todo el mundo.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+        <h3>Grado Científico Premium</h3>
+        <p>Fabricados bajo estándares GMP con pureza ≥99.9% certificada mediante cromatografía líquida HPLC por laboratorios independientes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+        <h3>COA por Cada Lote</h3>
+        <p>Cada producto cuenta con su Certificado de Análisis (COA) verificable, con número de lote y resultados de pureza disponibles.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Marco Legal Establecido</h3>
+        <p>Los compuestos de investigación son legalmente comercializables en Estados Unidos bajo regulaciones específicas de la industria científica.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>Envío Legal a Todo USA</h3>
+        <p>Realizamos envíos a todos los estados de Estados Unidos con empaque especializado que preserva la integridad del producto.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-label">Marco Regulatorio</div>
+    <h2>¿Por qué "Uso en Investigación Científica"?</h2>
+    <p>La designación <strong style="color:#fff;">"Para uso en investigación científica"</strong> es un estándar regulatorio requerido por las agencias federales para esta categoría de compuestos. Dos agencias principales regulan este espacio:</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Agencia</th><th>Función</th><th>Relevancia para Evorax</th></tr>
+        <tr>
+          <td>FDA</td>
+          <td>Regula la fabricación y comercialización de compuestos bajo leyes 503A y 503B de la FD&C Act.</td>
+          <td>Nuestros productos son fabricados en instalaciones GMP certificadas y vendidos bajo la categoría de compuestos de investigación.</td>
+        </tr>
+        <tr>
+          <td>FTC</td>
+          <td>Garantiza la veracidad en publicidad y marketing. Penaliza afirmaciones falsas o engañosas.</td>
+          <td>Toda nuestra comunicación es educativa e informativa. No hacemos afirmaciones de diagnóstico, tratamiento o cura.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="highlight" style="margin-top:1.5rem;">
+      <div class="highlight-title">¿Esto significa que los productos no son de calidad?</div>
+      <p>En absoluto. La designación "uso en investigación" es simplemente un estándar regulatorio de la industria — no un indicador de calidad menor. De hecho, los compuestos de investigación suelen tener <strong style="color:var(--gold);">estándares de pureza más exigentes</strong> que muchos productos comerciales, precisamente porque se usan en contextos científicos donde la precisión es crítica.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-label">Nuestras Prácticas</div>
+    <h2>Cómo Operamos con Integridad</h2>
+    <p>En Evorax Longevity seguimos estrictamente las mejores prácticas de la industria para operar de forma transparente, legal y ética.</p>
+
+    <div class="do-dont">
+      <div class="do-box">
+        <h4>✓ LO QUE HACEMOS</h4>
+        <ul>
+          <li>Etiquetamos todos los productos claramente como compuestos de investigación científica</li>
+          <li>Publicamos Certificados de Análisis (COA) verificables por lote</li>
+          <li>Trabajamos exclusivamente con fabricantes GMP certificados</li>
+          <li>Proveemos información científica educativa sobre cada compuesto</li>
+          <li>Operamos con total transparencia sobre la naturaleza de nuestros productos</li>
+          <li>Mantenemos estándares de pureza ≥99.9% certificados independientemente</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>✗ LO QUE NO HACEMOS</h4>
+        <ul>
+          <li>No hacemos afirmaciones de diagnóstico, tratamiento o cura de enfermedades</li>
+          <li>No proporcionamos protocolos de uso o instrucciones de dosificación</li>
+          <li>No afirmamos que nuestros productos son aptos para consumo humano</li>
+          <li>No fabricamos claims de salud no respaldados por evidencia científica</li>
+          <li>No vendemos a menores de edad</li>
+          <li>No operamos en jurisdicciones donde estos productos están prohibidos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-label">Garantía de Calidad</div>
+    <h2>Nuestro Proceso de Verificación</h2>
+    <p>Cada producto que llega a nuestros clientes pasa por un riguroso proceso de verificación de calidad antes de ser comercializado.</p>
+
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="check-text"><strong>Selección de Proveedor GMP</strong> — Solo trabajamos con laboratorios con certificación de Buenas Prácticas de Manufactura (GMP) y trayectoria internacional verificable.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="check-text"><strong>Análisis HPLC por Lote</strong> — Cromatografía líquida de alta resolución con detección UV confirma identidad molecular y pureza ≥99.9% en cada producción.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="check-text"><strong>COA Verificable con QR</strong> — Cada lote genera un Certificado de Análisis público con código QR que enlaza directamente al reporte original del laboratorio.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="check-text"><strong>Almacenamiento Controlado</strong> — Los compuestos liofilizados se mantienen en condiciones de temperatura controlada para preservar su integridad hasta la entrega.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="check-text"><strong>Empaque Especializado</strong> — Cada envío utiliza materiales de empaque específicos para compuestos científicos que garantizan la integridad durante el transporte.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-label">Preguntas Frecuentes</div>
+    <h2>Preguntas Frecuentes sobre Compliance</h2>
+
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:1.5rem;">
+      <div style="background:var(--navy-mid);border:1px solid var(--border-s);border-radius:12px;padding:1.5rem;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:.6rem;">¿Es legal comprar estos productos en Estados Unidos?</div>
+        <div style="font-size:13px;color:var(--gray-light);line-height:1.7;">Sí. Los compuestos de investigación científica son legalmente comercializables en Estados Unidos cuando se venden bajo la designación correcta y sin afirmaciones de uso humano. Realizamos envíos a todos los estados del país.</div>
+      </div>
+      <div style="background:var(--navy-mid);border:1px solid var(--border-s);border-radius:12px;padding:1.5rem;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:.6rem;">¿Qué garantiza la calidad de los productos?</div>
+        <div style="font-size:13px;color:var(--gray-light);line-height:1.7;">Todos nuestros productos provienen de fabricantes GMP certificados y cuentan con análisis HPLC independiente. El COA (Certificado de Análisis) está disponible para cada lote, verificable con QR code.</div>
+      </div>
+      <div style="background:var(--navy-mid);border:1px solid var(--border-s);border-radius:12px;padding:1.5rem;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:.6rem;">¿Por qué Evorax no hace afirmaciones de salud?</div>
+        <div style="font-size:13px;color:var(--gray-light);line-height:1.7;">Las regulaciones de la FDA y la FTC prohíben hacer afirmaciones de diagnóstico, tratamiento o cura sin aprobación previa. Para operar dentro del marco legal, toda nuestra información es de carácter educativo y científico únicamente.</div>
+      </div>
+      <div style="background:var(--navy-mid);border:1px solid var(--border-s);border-radius:12px;padding:1.5rem;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:.6rem;">¿Cómo puedo verificar la autenticidad de un producto?</div>
+        <div style="font-size:13px;color:var(--gray-light);line-height:1.7;">Cada producto incluye un número de lote y acceso al COA del laboratorio. Puedes contactarnos a info@evoraxlongevity.com para solicitar el certificado de análisis de cualquier producto.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- LEGAL DISCLAIMER -->
+  <div style="background:rgba(201,168,76,.04);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:center;">
+    <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;">Aviso Legal</div>
+    <p style="font-size:12px;color:var(--gray);line-height:1.9;max-width:700px;margin:0 auto;">Los productos comercializados por Evorax Longevity son compuestos bioactivos de grado científico destinados exclusivamente a fines de investigación y desarrollo. No han sido evaluados por la FDA (Food and Drug Administration) para el diagnóstico, tratamiento, cura o prevención de ninguna enfermedad o condición médica. La información presentada en este sitio web es de carácter educativo e informativo únicamente y no constituye asesoramiento médico. Evorax Longevity no se hace responsable del uso indebido de sus productos fuera del contexto de investigación científica para el que están destinados. Al adquirir cualquiera de nuestros productos, el comprador confirma que es mayor de 18 años, que los adquiere exclusivamente para fines de investigación y que asume plena responsabilidad por su uso.</p>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="section" style="margin-top:3rem;margin-bottom:2rem;">
+    <div class="section-label">Referencias</div>
+    <h2>Recursos Regulatorios</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:1rem;">
+      <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/current-good-manufacturing-practice-guidance-human-drug-compounding-outsourcing-facilities-under" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--navy-mid);border:1px solid var(--border-s);border-radius:8px;text-decoration:none;color:var(--gray-light);font-size:13px;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border-s)'">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        FDA 503A & 503B — Guidance for Human Drug Compounding
+      </a>
+      <a href="https://www.ftc.gov/business-guidance/advertising-marketing" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--navy-mid);border:1px solid var(--border-s);border-radius:8px;text-decoration:none;color:var(--gray-light);font-size:13px;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--border)'" onmouseout="this.style.borderColor='var(--border-s)'">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/><polyline points="15 3 21 3 21 9" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="14" x2="21" y2="3" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        FTC — Health Products Advertising & Marketing Guidance
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="ft-text">© 2026 Evorax Longevity · Health, Wellness & Science · info@evoraxlongevity.com · evoraxlongevity.com</p>
+  <a href="index.html" class="ft-back">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver al catálogo
+  </a>
+</footer>
+
+</body>
+</html>
