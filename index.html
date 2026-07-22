@@ -1628,6 +1628,74 @@ renderProducts('all');
 
 <!-- COMPLIANCE MODAL -->
 <div class="mo" id="complianceModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:600px;">
+    <div class="mh">
+      <div class="mh-title" style="display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#c9a84c" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Información Regulatoria</span>
+      </div>
+      <button class="mc" onclick="document.getElementById('complianceModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="mb" style="padding:2rem;">
+
+      <div style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;text-align:center;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;color:var(--gold);margin-bottom:.5rem;">¿Qué son los Productos de Investigación?</div>
+        <div style="font-size:13px;color:var(--gray-light);line-height:1.7;">En Evorax Longevity comercializamos compuestos bioactivos de grado científico destinados exclusivamente a fines de investigación y desarrollo. Esta es una práctica estándar y legal en la industria.</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:1.5rem;">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--border-s);">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">🔬</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px;">¿Por qué dice "Uso en Investigación"?</div>
+            <div style="font-size:12px;color:var(--gray-light);line-height:1.6;">Esta designación es un estándar regulatorio de la industria en Estados Unidos. Los compuestos bioactivos y péptidos de grado científico son comercializados bajo esta categoría, lo que nos permite operar con total transparencia y cumplimiento legal.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--border-s);">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">✅</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px;">Calidad y Pureza Garantizada</div>
+            <div style="font-size:12px;color:var(--gray-light);line-height:1.6;">Todos nuestros productos son fabricados bajo estándares GMP con pureza ≥99.9% certificada mediante análisis HPLC independiente. Cada lote cuenta con su Certificado de Análisis (COA) verificable.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid var(--border-s);">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(201,168,76,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">📦</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px;">Envío Seguro a Todo USA</div>
+            <div style="font-size:12px;color:var(--gray-light);line-height:1.6;">Nuestros productos son legalmente comercializables en Estados Unidos bajo la categoría de compuestos de investigación. Realizamos envíos a todos los estados con empaque especializado.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 14px;background:rgba(201,168,76,.04);border-radius:8px;border:1px solid var(--border);margin-bottom:1.5rem;">
+        <div style="font-size:11px;color:var(--gray);line-height:1.7;text-align:center;">Los productos de Evorax Longevity son compuestos de investigación científica. No han sido evaluados por la FDA para diagnóstico, tratamiento o prevención de enfermedades. La información presentada es con fines educativos e informativos únicamente.</div>
+      </div>
+
+      <div style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="document.getElementById('complianceModal').classList.remove('open')" class="btn-s" style="font-size:12px;padding:10px 24px;">Cerrar</button>
+        <a href="compliance.html" class="btn-p" style="font-size:12px;padding:10px 24px;display:inline-block;">Ver Página Completa →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- REFERRAL BANNER -->
+<div class="ref-banner" id="refBanner">
+  <div class="ref-banner-icon">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+  </div>
+  <div class="ref-banner-text">
+    Referido por <span class="ref-banner-name" id="refBannerName"></span><br>
+    <span style="font-size:11px;color:var(--gray);">Referred by</span>
+  </div>
+</div>
+
+
+<!-- COMPLIANCE MODAL -->
+<div class="mo" id="complianceModal" onclick="if(event.target===this)this.classList.remove('open')">
   <div class="modal" style="max-width:640px;">
     <div class="mh">
       <div class="mh-title" style="display:flex;align-items:center;gap:10px;">
