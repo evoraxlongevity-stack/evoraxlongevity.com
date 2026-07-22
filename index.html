@@ -600,7 +600,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
       <button class="lang-btn active" onclick="setLang('es')">ES</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-    <a href="#products" class="nav-cta" data-es="Ordenar Ahora" data-en="Order Now">Ordenar Ahora</a>
+    <a href="#products" class="nav-cta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'});return false;" data-es="Ordenar Ahora" data-en="Order Now">Ordenar Ahora</a>
   </div>
 </nav>
 
@@ -866,7 +866,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
         </div>
         <div class="cert-title" data-es="Grado Premium · Salud & Bienestar" data-en="Premium Grade · Health & Wellness">Grado Premium · Salud & Bienestar</div>
         <div class="cert-text" data-es="Todos los productos Evorax Longevity son fabricados bajo estándares de laboratorio premium para estudios avanzados de investigación preclínica." data-en="All Evorax Longevity products are manufactured under premium laboratory standards for advanced preclinical research studies.">Todos los productos Evorax Longevity son fabricados bajo estándares de laboratorio premium para estudios avanzados de investigación preclínica.</div>
-        <div class="cert-badge">
+        <div class="cert-badge" onclick="document.getElementById('complianceModal').classList.add('open')" style="cursor:pointer;">
           <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="url(#goldG)" stroke-width="1.5"/><line x1="12" y1="9" x2="12" y2="13" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/></svg>
           Grado Premium Certificado
         </div>
@@ -888,7 +888,7 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
         <div class="tier reveal-scale d3"><div class="t-lbl" data-es="Nivel 3" data-en="Tier 3">Nivel 3</div><div class="t-val">35%</div><div class="t-desc">off · $3,000+</div></div>
       </div>
     </div>
-    <div style="text-align:center;"><a href="#contact" class="btn-p" data-es="Contactar Ahora" data-en="Contact Now">Contactar Ahora</a></div>
+    <div style="text-align:center;"><a href="mailto:info@evoraxlongevity.com?subject=Programa%20Mayoreo%20Evorax" class="btn-p" data-es="Contactar Ahora" data-en="Contact Now">Contactar Ahora</a></div>
   </div>
 </section>
 
@@ -899,9 +899,13 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
     <h2 class="sec-title reveal" data-es="Únete a Nuestra Comunidad" data-en="Join Our Community">Únete a Nuestra Comunidad</h2>
     <p class="sec-sub reveal" style="margin:0 auto;" data-es="Síguenos en Instagram para contenido educativo, novedades y ofertas exclusivas. También puedes contactarnos por email." data-en="Follow us on Instagram for educational content, news and exclusive offers. You can also contact us by email.">Síguenos en Instagram para contenido educativo, novedades y ofertas exclusivas. También puedes contactarnos por email.</p>
     <div class="cbtns reveal">
-      <a href="mailto:info@evoraxlongevity.com" class="btn-p" style="display:inline-flex;align-items:center;gap:10px;">
+      <a href="https://www.instagram.com/evoraxlongevity?utm_source=qr" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:10px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:800;font-size:12px;letter-spacing:2px;text-decoration:none;transition:all .3s;text-transform:uppercase;">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="white"/></svg>
+        <span data-es="Síguenos en Instagram" data-en="Follow us on Instagram">Síguenos en Instagram</span>
+      </a>
+      <a href="mailto:info@evoraxlongevity.com" style="display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:10px;border:1px solid var(--border);color:var(--off-white);font-weight:600;font-size:12px;letter-spacing:2px;text-decoration:none;background:transparent;transition:all .3s;text-transform:uppercase;">
         <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span data-es="Enviar Email" data-en="Send Email">Enviar Email</span>
+        <span data-es="Contáctanos por Email" data-en="Contact us by Email">Contáctanos por Email</span>
       </a>
     </div>
   </div>
@@ -936,10 +940,10 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
     <div>
       <div class="ft-col-title" data-es="Legal" data-en="Legal">Legal</div>
       <ul class="ft-links">
-        <li><a href="#" data-es="Privacidad" data-en="Privacy">Privacidad</a></li>
-        <li><a href="#" data-es="Términos" data-en="Terms">Términos</a></li>
-        <li><a href="#" data-es="Envíos" data-en="Shipping">Envíos</a></li>
-        <li><a href="#" data-es="Devoluciones" data-en="Returns">Devoluciones</a></li>
+        <li><a href="javascript:void(0)" href="compliance.html" data-es="Privacidad &amp; Legal" data-en="Privacy &amp; Legal">Privacidad &amp; Legal</a></li>
+        <li><a href="javascript:void(0)" href="compliance.html" data-es="Términos de Uso" data-en="Terms of Use">Términos de Uso</a></li>
+        <li><a href="mailto:info@evoraxlongevity.com?subject=Consulta%20de%20Env%C3%ADo" data-es="Consultas de Envío" data-en="Shipping Inquiries">Consultas de Envío</a></li>
+        <li><a href="mailto:info@evoraxlongevity.com?subject=Devoluci%C3%B3n" data-es="Devoluciones" data-en="Returns">Devoluciones</a></li>
       </ul>
     </div>
   </div>
@@ -1672,8 +1676,9 @@ renderProducts('all');
         <div style="font-size:10px;color:var(--gray);line-height:1.7;text-align:center;" data-es="Los productos de Evorax Longevity son compuestos de investigaci\u00f3n cient\u00edfica. No han sido evaluados por la FDA para diagn\u00f3stico, tratamiento o prevenci\u00f3n de enfermedades. La informaci\u00f3n presentada es con fines educativos e informativos \u00fanicamente." data-en="Evorax Longevity products are scientific research compounds. They have not been evaluated by the FDA for diagnosis, treatment or prevention of disease. Information presented is for educational and informational purposes only.">Los productos de Evorax Longevity son compuestos de investigaci\u00f3n cient\u00edfica. No han sido evaluados por la FDA para diagn\u00f3stico, tratamiento o prevenci\u00f3n de enfermedades. La informaci\u00f3n presentada es con fines educativos e informativos \u00fanicamente.</div>
       </div>
 
-      <div style="text-align:center;margin-top:1.5rem;">
-        <button onclick="document.getElementById('complianceModal').classList.remove('open')" class="btn-p" style="font-size:12px;padding:10px 28px;" data-es="Entendido" data-en="Understood">Entendido</button>
+      <div style="text-align:center;margin-top:1.5rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="document.getElementById('complianceModal').classList.remove('open')" class="btn-s" style="font-size:12px;padding:10px 24px;" data-es="Cerrar" data-en="Close">Cerrar</button>
+        <a href="compliance.html" class="btn-p" style="font-size:12px;padding:10px 24px;display:inline-block;" data-es="Ver Página Completa →" data-en="View Full Page →">Ver Página Completa →</a>
       </div>
 
     </div>
@@ -1695,7 +1700,7 @@ renderProducts('all');
     <path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
   <span style="font-size:10px;color:rgba(138,154,181,0.5);letter-spacing:.5px;" data-es="Productos de investigaci&#xf3;n cient&#xed;fica · Grado premium certificado · " data-en="Scientific research products · Certified premium grade · ">Productos de investigaci&#xf3;n cient&#xed;fica · Grado premium certificado · </span>
-  <button onclick="document.getElementById('complianceModal').classList.add('open')" style="background:none;border:none;cursor:pointer;font-size:10px;color:rgba(201,168,76,0.4);letter-spacing:.5px;padding:0;text-decoration:underline;transition:color .2s;" onmouseover="this.style.color='rgba(201,168,76,0.8)'" onmouseout="this.style.color='rgba(201,168,76,0.4)'" data-es="Info Legal" data-en="Legal Info">Info Legal</button>
+  <button href="compliance.html" style="background:none;border:none;cursor:pointer;font-size:10px;color:rgba(201,168,76,0.5);letter-spacing:.5px;padding:0;text-decoration:underline;transition:color .2s;display:inline;" onmouseover="this.style.color='rgba(201,168,76,0.9)'" onmouseout="this.style.color='rgba(201,168,76,0.5)'" data-es="ⓘ Información Regulatoria" data-en="ⓘ Regulatory Information">ⓘ Información Regulatoria</button>
   <button onclick="document.getElementById('complianceBar').style.display='none'" style="background:none;border:none;cursor:pointer;color:rgba(138,154,181,0.3);font-size:14px;padding:0 0 0 8px;line-height:1;transition:color .2s;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(138,154,181,0.3)'">&#x00D7;</button>
 </div>
 <div style="height:36px;"></div>
