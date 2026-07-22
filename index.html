@@ -834,9 +834,9 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
       <div class="why-card-text" data-es="Precios transparentes para detal y mayoreo. Envío gratis en pedidos sobre $200. Programa de revendedores con descuentos por volumen." data-en="Transparent pricing for retail and wholesale. Free shipping over $200. Reseller program with volume discounts.">Precios transparentes para detal y mayoreo. Envío gratis en pedidos sobre $200. Programa de revendedores con descuentos por volumen.</div>
     </div>
     <div class="why-card rr d3">
-      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10h8M8 14h5" stroke="url(#goldG)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="why-card-title" data-es="Soporte vía WhatsApp" data-en="WhatsApp Support">Soporte vía WhatsApp</div>
-      <div class="why-card-text" data-es="Atención personalizada experta disponible vía WhatsApp. Acompañamiento completo desde la consulta hasta la entrega." data-en="Expert personalized support available via WhatsApp. Full accompaniment from inquiry to delivery.">Atención personalizada experta disponible vía WhatsApp. Acompañamiento completo desde la consulta hasta la entrega.</div>
+      <div class="wicon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" fill="url(#goldG2)" opacity=".15" stroke="url(#goldG)" stroke-width="1.5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke="url(#goldG)" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#goldG)" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="why-card-title" data-es="Síguenos en Redes Sociales" data-en="Follow Us on Social Media">Síguenos en Redes Sociales</div>
+      <div class="why-card-text" data-es="Contenido educativo, novedades y actualizaciones de productos en nuestras redes. Únete a nuestra comunidad de investigación y bienestar." data-en="Educational content, news and product updates on our social media. Join our research and wellness community.">Contenido educativo, novedades y actualizaciones de productos en nuestras redes. Únete a nuestra comunidad de investigación y bienestar.</div>
     </div>
   </div>
 </section>
@@ -896,8 +896,8 @@ footer{background:#050e1a;padding:3.5rem;border-top:1px solid var(--border-s);po
 <section id="contact">
   <div class="contact-wrap">
     <p class="eyebrow reveal" style="justify-content:center;" data-es="Contáctanos" data-en="Contact Us">Contáctanos</p>
-    <h2 class="sec-title reveal" data-es="¿Listo para Ordenar?" data-en="Ready to Order?">¿Listo para Ordenar?</h2>
-    <p class="sec-sub reveal" style="margin:0 auto;" data-es="Nuestro equipo está disponible para asesorarte en tu selección de productos, precios mayoreo y envíos." data-en="Our team is available to advise you on product selection, wholesale pricing, and shipping.">Nuestro equipo está disponible para asesorarte en tu selección de productos, precios mayoreo y envíos.</p>
+    <h2 class="sec-title reveal" data-es="Únete a Nuestra Comunidad" data-en="Join Our Community">Únete a Nuestra Comunidad</h2>
+    <p class="sec-sub reveal" style="margin:0 auto;" data-es="Síguenos en Instagram para contenido educativo, novedades y ofertas exclusivas. También puedes contactarnos por email." data-en="Follow us on Instagram for educational content, news and exclusive offers. You can also contact us by email.">Síguenos en Instagram para contenido educativo, novedades y ofertas exclusivas. También puedes contactarnos por email.</p>
     <div class="cbtns reveal">
       <a href="mailto:info@evoraxlongevity.com" class="btn-p" style="display:inline-flex;align-items:center;gap:10px;">
         <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1148,6 +1148,12 @@ document.querySelectorAll('.counter').forEach(el=>{
 
 // LANG
 function setLang(l){
+  // Update compliance bar text
+  setTimeout(()=>{
+    document.querySelectorAll('[data-es]').forEach(el=>{
+      if(el.tagName!=='INPUT') el.textContent=el.getAttribute('data-'+l);
+    });
+  },10);
   window.currentLang=l;
   lang=l;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
@@ -1673,6 +1679,26 @@ renderProducts('all');
     </div>
   </div>
 </div>
+
+
+<!-- DISCRETE COMPLIANCE BAR -->
+<div id="complianceBar" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:90;
+  background:rgba(7,18,32,0.97);
+  border-top:1px solid rgba(201,168,76,0.15);
+  padding:8px 2rem;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  backdrop-filter:blur(10px);
+">
+  <svg viewBox="0 0 24 24" fill="none" width="13" height="13" style="flex-shrink:0;opacity:.5;">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#c9a84c" stroke-width="1.5"/>
+    <path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <span style="font-size:10px;color:rgba(138,154,181,0.5);letter-spacing:.5px;" data-es="Productos de investigaci&#xf3;n cient&#xed;fica · Grado premium certificado · " data-en="Scientific research products · Certified premium grade · ">Productos de investigaci&#xf3;n cient&#xed;fica · Grado premium certificado · </span>
+  <button onclick="document.getElementById('complianceModal').classList.add('open')" style="background:none;border:none;cursor:pointer;font-size:10px;color:rgba(201,168,76,0.4);letter-spacing:.5px;padding:0;text-decoration:underline;transition:color .2s;" onmouseover="this.style.color='rgba(201,168,76,0.8)'" onmouseout="this.style.color='rgba(201,168,76,0.4)'" data-es="Info Legal" data-en="Legal Info">Info Legal</button>
+  <button onclick="document.getElementById('complianceBar').style.display='none'" style="background:none;border:none;cursor:pointer;color:rgba(138,154,181,0.3);font-size:14px;padding:0 0 0 8px;line-height:1;transition:color .2s;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(138,154,181,0.3)'">&#x00D7;</button>
+</div>
+<div style="height:36px;"></div>
 
 </body>
 </html>
